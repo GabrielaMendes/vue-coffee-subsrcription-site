@@ -3,6 +3,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        "change-menu": "680px",
+      },
       fontFamily: {
         barlow: ["'Barlow', sans-serif"],
         fraunces: ["'Fraunces', serif"],
@@ -15,6 +18,7 @@ module.exports = {
         "light-salmon": "#FDD6BA",
         "primary-green": "#0E8784",
         "secondary-green": "#66D2CF",
+        "light-overlary": "rgba(254, 252, 247, 0.505)",
       },
     },
   },

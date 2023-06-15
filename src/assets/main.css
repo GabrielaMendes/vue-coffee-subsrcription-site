@@ -5,3 +5,7 @@
 body {
   @apply bg-light-beige w-screen;
 }
+
+.menu-gradient {
+  @apply bg-gradient-to-b from-light-beige to-light-overlary;
+}
