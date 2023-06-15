@@ -3,9 +3,19 @@
 @tailwind utilities;
 
 body {
-  @apply bg-light-beige w-screen;
+  @apply bg-light-beige w-screen font-barlow text-[15px] lg:text-base;
 }
 
 .menu-gradient {
   @apply bg-gradient-to-b from-light-beige to-light-overlary;
+}
+
+@layer components {
+  .menu-item {
+    @apply uppercase no-underline font-bold text-sm text-grey-text hover:text-dark-bluish-gray-text
+  }
+
+  .mobile-menu-item {
+    @apply capitalize no-underline font-bold font-fraunces text-2xl text-dark-bluish-gray-text
+  }
 }
