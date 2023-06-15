@@ -23,5 +23,7 @@ import { RouterLink } from "vue-router"
         </RouterLink>
       </div>
     </div>
+
+    <!-- Coffees -->
   </main>
 </template>

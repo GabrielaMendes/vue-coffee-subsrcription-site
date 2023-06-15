@@ -24,7 +24,7 @@ body {
   }
 
   .app-button {
-    @apply bg-primary-green w-[218px] h-14 rounded-md hover:bg-secondary-green hover-transition flex items-center justify-center;
+    @apply bg-primary-green w-[218px] h-14 rounded-md hover:bg-secondary-green hover-transition flex items-center justify-center disabled:bg-dark-greyish-cream;
   }
 }
 
