@@ -10,7 +10,9 @@ const modalNav = ref(false)
 
 <template>
   <header class="py-14 flex items-center justify-between relative">
-    <IconLogo class="change-menu:transform change-menu:scale-110" />
+    <RouterLink to="/">
+      <IconLogo class="change-menu:transform change-menu:scale-110" />
+    </RouterLink>
 
     <!-- Tablet and Desktop Menu -->
     <nav class="hidden change-menu:flex gap-12">
