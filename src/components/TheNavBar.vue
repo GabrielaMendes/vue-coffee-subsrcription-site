@@ -23,7 +23,7 @@ const modalNav = ref(false)
       <RouterLink to="/">
         <span
           class="menu-item"
-          >about</span
+          >about us</span
         >
       </RouterLink>
       <RouterLink to="/">

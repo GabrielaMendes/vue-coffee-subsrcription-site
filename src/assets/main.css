@@ -10,12 +10,41 @@ body {
   @apply bg-gradient-to-b from-light-beige to-light-overlary;
 }
 
+.hero-bg {
+  @apply h-[500px] lg:h-[600px] bg-cover bg-right bg-[url('src/assets/images/home/mobile/image-hero-coffeepress.jpg')] sm:bg-[url('src/assets/images/home/tablet/image-hero-coffeepress.jpg')] lg:bg-[url('src/assets/images/home/desktop/image-hero-coffeepress.jpg')];
+}
+
 @layer components {
   .menu-item {
-    @apply uppercase no-underline font-bold text-sm text-grey-text hover:text-dark-bluish-gray-text
+    @apply uppercase no-underline font-bold text-sm text-grey-text hover:text-dark-bluish-gray-text hover-transition;
   }
 
   .mobile-menu-item {
-    @apply capitalize no-underline font-bold font-fraunces text-2xl text-dark-bluish-gray-text
+    @apply capitalize no-underline font-bold font-fraunces text-2xl text-dark-bluish-gray-text;
+  }
+
+  .app-button {
+    @apply bg-primary-green w-[218px] h-14 rounded-md hover:bg-secondary-green hover-transition flex items-center justify-center;
+  }
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-fraunces font-black leading-none md:leading-tight lg:leading-snug;
+  }
+}
+
+@layer utilities {
+  .extra-padding {
+    @apply px-6 sm:px-20;
+  }
+
+  .hover-transition {
+    @apply transition-colors duration-150 ease-linear
   }
 }
