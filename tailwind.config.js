@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        "xs": "444px",
         "change-menu": "680px",
+        "lger": "1307px",
       },
       fontFamily: {
         barlow: ["'Barlow', sans-serif"],
@@ -21,6 +23,7 @@ module.exports = {
         "primary-green": "#0E8784",
         "secondary-green": "#66D2CF",
         "light-overlary": "rgba(254, 252, 247, 0.505)",
+        "lighter-overlary": "rgba(254, 252, 247, 0.0001)",
       },
     },
   },

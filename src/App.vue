@@ -4,7 +4,7 @@ import TheNavBar from './components/TheNavBar.vue';
 </script>
 
 <template>
-  <div class="w-full max-w-[1360px] px-10 mx-auto">
+  <div class="w-full max-w-[1400px] px-10 mx-auto">
     <TheNavBar />
     <RouterView />
   </div>
