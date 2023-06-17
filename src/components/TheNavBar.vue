@@ -11,7 +11,8 @@ const modalNav = ref(false)
 <template>
   <header class="py-14 flex items-center justify-between relative">
     <RouterLink to="/">
-      <IconLogo class="change-menu:transform change-menu:scale-110" />
+      <IconLogo aria-hidden="true" class="change-menu:transform change-menu:scale-110" />
+      <span class="hidden">Coffeeroasters</span>
     </RouterLink>
 
     <!-- Tablet and Desktop Menu -->
@@ -38,8 +39,15 @@ const modalNav = ref(false)
 
     <!-- Burger Menu -->
     <div class="change-menu:hidden">
-      <IconHamburger v-if="!modalNav" class="transform scale-150" />
-      <IconClose v-else class="transform scale-150" />
+      <div v-if="!modalNav">
+        <IconHamburger role="button" class="transform scale-150" />
+        <span class="hidden">Navigation menu</span>
+      </div>
+      
+      <div v-else>
+        <IconClose role="button" class="transform scale-150" />
+        <span class="hidden">Close menu</span>
+      </div>
       
       <div v-if="modalNav" class="absolute w-full top-full left-0">
         <nav
