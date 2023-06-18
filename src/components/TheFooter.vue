@@ -7,10 +7,10 @@ import IconInstagram from "./icons/social-media/IconInstagram.vue"
 </script>
 
 <template>
-  <footer class="bg-dark-grey-bg py-12 mb-16 w-full extra-padding flex flex-col gap-12 items-center lg:flex-row lg:justify-between">
+  <footer class="bg-dark-grey-bg py-14 mb-16 w-full extra-padding flex flex-col gap-12 items-center lg:flex-row lg:justify-between">
     <div class="flex flex-col gap-12 sm:gap-8 items-center lg:flex-row lg:gap-24">
       <RouterLink to="/">
-        <IconLogo light="true" aria-hidden="true" class="change-menu:transform change-menu:scale-110" />
+        <IconLogo :light="true" aria-hidden="true" class="change-menu:transform change-menu:scale-110" />
         <span class="hidden">Coffeeroasters</span>
       </RouterLink>
       <!-- Menu -->
