@@ -11,7 +11,7 @@ import IconInstagram from "./icons/social-media/IconInstagram.vue";
     class="bg-dark-grey-bg py-14 mb-16 w-full extra-padding flex flex-col gap-12 items-center lg:flex-row lg:justify-between"
   >
     <div class="flex flex-col gap-12 sm:gap-8 items-center lg:flex-row lg:gap-24">
-      <RouterLink to="/">
+      <RouterLink :to="{name: 'home'}">
         <IconLogo
           :light="true"
           aria-hidden="true"
@@ -21,13 +21,13 @@ import IconInstagram from "./icons/social-media/IconInstagram.vue";
       </RouterLink>
       <!-- Menu -->
       <nav class="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
-        <RouterLink to="/">
+        <RouterLink :to="{name: 'home'}">
           <span class="menu-item hover:text-light-beige">home</span>
         </RouterLink>
-        <RouterLink to="/">
+        <RouterLink :to="{name: 'about'}">
           <span class="menu-item hover:text-light-beige">about us</span>
         </RouterLink>
-        <RouterLink to="/">
+        <RouterLink :to="{name: 'create'}">
           <span class="menu-item hover:text-light-beige">create your plan</span>
         </RouterLink>
       </nav>
