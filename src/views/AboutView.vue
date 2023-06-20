@@ -11,6 +11,12 @@ const commitmentImg = computed(() => {
     lgAndLarger.value ? "desktop" : (smAndLarger.value ? "tablet" : "mobile")
   }/image-commitment.jpg`;
 });
+
+const qualityImg = computed(() => {
+  return `src/assets/images/about/${
+    lgAndLarger.value ? "desktop" : (smAndLarger.value ? "tablet" : "mobile")
+  }/image-quality.jpg`;
+});
 </script>
 
 <template>
@@ -32,7 +38,7 @@ const commitmentImg = computed(() => {
     <!-- Our Commitment -->
     <section class="w-full lg:extra-padding flex flex-col sm:flex-row items-center gap-16 lg:gap-28">
       <img :src="commitmentImg" alt="a barista pouring milk on a cup of coffee" class="rounded-md" />
-      <div class="flex flex-col justify-center items-center sm:items-start gap-10">
+      <div class="text-center sm:text-left flex flex-col justify-center items-center sm:items-start gap-10">
         <h2 class="text-[32px] lg:text-[40px]">Our commitment</h2>
         <p>
           We're built on a simple mission and a commitment to doing good along the way. We want to
@@ -44,6 +50,17 @@ const commitmentImg = computed(() => {
           community initiatives, and invest in coffee plant science. Curating only the finest
           blends, we roast each lot to highlight tasting profiles distinctive to their native
           growing region.
+        </p>
+      </div>
+    </section>
+
+    <!-- Quality -->
+    <section class="w-full mt-[calc(120px_+_min(120px,18vw))] sm:mt-[calc(140px_+_min(150px,18vw))] lg:mt-[250px] bg-dark-grey-bg rounded-lg extra-padding pb-20 flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-28">
+      <img :src="qualityImg" alt="a barista pouring milk on a cup of coffee" class="rounded-md -mt-[min(120px,_18vw)] sm:-mt-[min(150px,_18vw)] lg:-mt-20" />
+      <div class="lg:pt-10 text-center lg:text-left text-light-beige flex flex-col justify-center items-center lg:items-start gap-10">
+        <h2 class="text-[28px] sm:text-[32px] lg:text-[40px]">Uncompromising quality</h2>
+        <p>
+          Although we work with growers who pay close attention to all stages of harvest and processing, we employ, on our end, a rigorous quality control program to avoid over-roasting or baking the coffee dry. Every bag of coffee is tagged with a roast date and batch number. Our goal is to roast consistent, user-friendly coffee, so that brewing is easy and enjoyable.
         </p>
       </div>
     </section>
