@@ -25,7 +25,7 @@ body {
   }
 
   section {
-    @apply mb-[120px] sm:mb-[140px] lg:mb-[200px];
+    @apply mb-[120px] sm:mb-[140px] lg:mb-[180px];
   }
 }
 
