@@ -72,7 +72,7 @@ const steps = [
 <template>
   <main>
     <!-- Hero -->
-    <section class="w-full hero-bg rounded-lg extra-padding">
+    <section class="w-full hero-home-bg rounded-lg extra-padding">
       <div
         class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
       >
