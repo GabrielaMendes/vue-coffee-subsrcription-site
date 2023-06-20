@@ -6,6 +6,9 @@ import IconHamburger from "./icons/IconHamburger.vue";
 import IconClose from "./icons/IconClose.vue";
 
 const modalNav = ref(false);
+const toggleNav = () => {
+  modalNav.value = !modalNav.value;
+};
 </script>
 
 <template>
@@ -17,13 +20,13 @@ const modalNav = ref(false);
 
     <!-- Tablet and Desktop Menu -->
     <nav class="hidden change-menu:flex gap-12">
-      <RouterLink :to="{name: 'home'}">
+      <RouterLink :to="{ name: 'home' }">
         <span class="menu-item">home</span>
       </RouterLink>
-      <RouterLink :to="{name: 'about'}">
+      <RouterLink :to="{ name: 'about' }">
         <span class="menu-item">about us</span>
       </RouterLink>
-      <RouterLink :to="{name: 'create'}">
+      <RouterLink :to="{ name: 'create' }">
         <span class="menu-item">create your plan</span>
       </RouterLink>
     </nav>
@@ -31,24 +34,24 @@ const modalNav = ref(false);
     <!-- Burger Menu -->
     <div class="change-menu:hidden">
       <div v-if="!modalNav">
-        <IconHamburger role="button" class="transform scale-150" />
+        <IconHamburger role="button" @click="toggleNav" class="transform scale-150" />
         <span class="hidden">Navigation menu</span>
       </div>
 
       <div v-else>
-        <IconClose role="button" class="transform scale-150" />
+        <IconClose role="button" @click="toggleNav" class="transform scale-150" />
         <span class="hidden">Close menu</span>
       </div>
 
       <div v-if="modalNav" class="absolute w-full top-full left-0">
         <nav class="bg-light-beige flex flex-col items-center justify-center gap-10 py-10">
-          <RouterLink :to="{name: 'home'}">
+          <RouterLink @click="toggleNav" :to="{ name: 'home' }">
             <span class="mobile-menu-item">home</span>
           </RouterLink>
-          <RouterLink :to="{name: 'about'}">
+          <RouterLink @click="toggleNav" :to="{ name: 'about' }">
             <span class="mobile-menu-item">about us</span>
           </RouterLink>
-          <RouterLink :to="{name: 'create'}">
+          <RouterLink @click="toggleNav" :to="{ name: 'create' }">
             <span class="mobile-menu-item">create your plan</span>
           </RouterLink>
         </nav>
