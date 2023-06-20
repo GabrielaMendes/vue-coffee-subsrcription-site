@@ -1,8 +1,8 @@
 <script setup>
 import { RouterLink } from "vue-router"
-import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue";
-import IconGift from "@/components/icons/IconGift.vue";
-import IconTruck from "@/components/icons/IconTruck.vue";
+import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue"
+import IconGift from "@/components/icons/IconGift.vue"
+import IconTruck from "@/components/icons/IconTruck.vue"
 
 const coffees = [
   {
@@ -25,7 +25,7 @@ const coffees = [
     image: "src/assets/images/home/desktop/image-danche.png",
     description: "Ethiopian hand-harvested blend densely packed with vibrant fruit notes",
   },
-];
+]
 
 const benefits = [
   {
@@ -45,7 +45,28 @@ const benefits = [
     image: IconTruck,
     description: "We cover the cost and coffee is delivered fast. Peak freshness: guaranteed.",
   },
-];
+]
+
+const steps = [
+  {
+    number: "01",
+    name: "Pick your coffee",
+    description:
+      "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
+  },
+  {
+    number: "02",
+    name: "Choose the frequency",
+    description:
+      "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
+  },
+  {
+    number: "03",
+    name: "Receive and enjoy!",
+    description:
+      "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
+  },
+]
 </script>
 
 <template>
@@ -96,7 +117,9 @@ const benefits = [
 
     <!-- Why Choose Us -->
     <section class="w-full text-light-beige text-center">
-      <div class="bg-dark-grey-bg  extra-padding rounded-lg  w-full h-[902px] sm:h-[573px] overflow-visible">
+      <div
+        class="bg-dark-grey-bg extra-padding rounded-lg w-full h-[902px] sm:h-[573px] overflow-visible"
+      >
         <div class="py-16 lg:py-20 lg:w-1/2 mx-auto">
           <h2 class="mb-6 text-[28px] sm:text-[32px] lg:text-[40px]">Why choose us?</h2>
           <p>
@@ -107,20 +130,44 @@ const benefits = [
         </div>
       </div>
 
-        <div class="extra-padding grid grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 gap-6 -mt-[620px] sm:-mt-[320px] lg:-mt-[250px]">
-          <div
-            v-for="benefit in benefits"
-            :key="benefit.name"
-            class="bg-primary-green rounded-md text-center text-light-beige p-12 last:pt-[70px] last:sm:max-lg:pt-12 flex flex-col sm:max-lg:flex-row items-center gap-14 sm:max-lg:gap-12"
-          >
-            <component :is="benefit.image" class="shrink-0"></component>
-            
-            <div class="sm:max-lg:text-left">
-              <h3 class="mb-6 text-2xl">{{ benefit.name }}</h3>
-              <p>{{ benefit.description }}</p>
-            </div>
+      <div
+        class="extra-padding grid grid-rows-3 lg:grid-rows-1 lg:grid-cols-3 gap-6 -mt-[620px] sm:-mt-[320px] lg:-mt-[250px]"
+      >
+        <div
+          v-for="benefit in benefits"
+          :key="benefit.name"
+          class="bg-primary-green rounded-md text-center text-light-beige p-12 last:pt-[70px] last:sm:max-lg:pt-12 flex flex-col sm:max-lg:flex-row items-center gap-14 sm:max-lg:gap-12"
+        >
+          <component :is="benefit.image" class="shrink-0"></component>
+
+          <div class="sm:max-lg:text-left">
+            <h3 class="mb-6 text-2xl">{{ benefit.name }}</h3>
+            <p>{{ benefit.description }}</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="w-full max-w-[1045px] text-center sm:text-left lg:extra-padding">
+      <h2 class="text-2xl text-grey-text mb-20 sm:mb-14">How it works</h2>
+      
+      <div class="max-sm:mb-20 sm:grid sm:grid-cols-3 sm:gap-5 lg:gap-20 relative">
+        <span class="max-sm:hidden border-b-[3px] border-light-salmon w-[65vw] lg:w-[58vw] max-w-[658px] absolute top-3.5"></span>
+        
+        <div v-for="step in steps" :key="step.number" class="mb-14 flex-1">
+          <div class="max-sm:hidden mb-14 w-[31px] h-[31px] rounded-full bg-light-beige border-2 border-primary-green relative z-10">
+          </div>  
+          <div class="text-7xl text-light-salmon font-fraunces font-black mb-6">
+            {{ step.number }}
+          </div>
+          <h3 class="text-[28px] lg:text-[32px] mb-6">{{ step.name }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      </div>
+      <RouterLink role="button" class="app-button max-sm:mx-auto" to="/">
+        <span class="text-lg font-fraunces font-black"> Create your plan </span>
+      </RouterLink>
     </section>
   </main>
 </template>
