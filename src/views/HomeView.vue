@@ -1,8 +1,8 @@
 <script setup>
-import { RouterLink } from "vue-router"
-import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue"
-import IconGift from "@/components/icons/IconGift.vue"
-import IconTruck from "@/components/icons/IconTruck.vue"
+import { RouterLink } from "vue-router";
+import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue";
+import IconGift from "@/components/icons/IconGift.vue";
+import IconTruck from "@/components/icons/IconTruck.vue";
 
 const coffees = [
   {
@@ -25,7 +25,7 @@ const coffees = [
     image: "src/assets/images/home/desktop/image-danche.png",
     description: "Ethiopian hand-harvested blend densely packed with vibrant fruit notes",
   },
-]
+];
 
 const benefits = [
   {
@@ -45,7 +45,7 @@ const benefits = [
     image: IconTruck,
     description: "We cover the cost and coffee is delivered fast. Peak freshness: guaranteed.",
   },
-]
+];
 
 const steps = [
   {
@@ -66,7 +66,7 @@ const steps = [
     description:
       "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
   },
-]
+];
 </script>
 
 <template>
@@ -151,13 +151,16 @@ const steps = [
     <!-- How It Works -->
     <section class="w-full max-w-[1045px] text-center sm:text-left lg:extra-padding">
       <h2 class="text-2xl text-grey-text mb-20 sm:mb-14">How it works</h2>
-      
+
       <div class="max-sm:mb-20 sm:grid sm:grid-cols-3 sm:gap-5 lg:gap-20 relative">
-        <span class="max-sm:hidden border-b-[3px] border-light-salmon w-[65vw] lg:w-[58vw] max-w-[658px] absolute top-3.5"></span>
-        
+        <span
+          class="max-sm:hidden border-b-[3px] border-light-salmon w-[65vw] lg:w-[58vw] max-w-[658px] absolute top-3.5"
+        ></span>
+
         <div v-for="step in steps" :key="step.number" class="mb-14 flex-1">
-          <div class="max-sm:hidden mb-14 w-[31px] h-[31px] rounded-full bg-light-beige border-2 border-primary-green relative z-10">
-          </div>  
+          <div
+            class="max-sm:hidden mb-14 w-[31px] h-[31px] rounded-full bg-light-beige border-2 border-primary-green relative z-10"
+          ></div>
           <div class="text-7xl text-light-salmon font-fraunces font-black mb-6">
             {{ step.number }}
           </div>
