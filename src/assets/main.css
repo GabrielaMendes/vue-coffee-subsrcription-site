@@ -14,6 +14,10 @@ body {
   @apply h-[400px] lg:h-[450px] bg-cover bg-right bg-[url('src/assets/images/about/mobile/image-hero-whitecup.jpg')] sm:bg-[url('src/assets/images/about/tablet/image-hero-whitecup.jpg')] lg:bg-[url('src/assets/images/about/desktop/image-hero-whitecup.jpg')];
 }
 
+.hero-plan-bg {
+  @apply h-[400px] lg:h-[450px] bg-cover bg-right bg-[url('src/assets/images/plan/mobile/image-hero-blackcup.jpg')] sm:bg-[url('src/assets/images/plan/tablet/image-hero-blackcup.jpg')] lg:bg-[url('src/assets/images/plan/desktop/image-hero-blackcup.jpg')];
+}
+
 @layer base {
   h1,
   h2,
