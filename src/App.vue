@@ -7,15 +7,17 @@ import TheFooter from "./components/TheFooter.vue";
 <template>
   <div class="w-full max-w-[1400px] px-10 mx-auto">
     <TheNavBar />
-    <transition 
-      mode="out-in"
-      enter-from-class="opacity-0"
-      leave-to-class="opacity-0"
-      enter-active-class="transition-opacity duration-500 ease-in"
-      leave-active-class="transition-opacity duration-500 ease-in"
-    >
-      <RouterView />
-    </transition>
+    <RouterView v-slot="{ Component }">
+      <Transition
+        mode="out-in"
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+        enter-active-class="transition-opacity duration-300 ease-in"
+        leave-active-class="transition-opacity duration-300 ease-in"
+      >
+        <component :is="Component"></component>
+      </Transition>
+    </RouterView>
     <TheFooter />
   </div>
 </template>
