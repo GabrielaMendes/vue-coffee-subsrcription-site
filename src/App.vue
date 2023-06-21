@@ -5,7 +5,7 @@ import TheFooter from "./components/TheFooter.vue";
 </script>
 
 <template>
-  <div class="w-full max-w-[1400px] px-10 mx-auto">
+  <div class="w-full max-w-[1400px] px-9 mx-auto">
     <TheNavBar />
     <RouterView v-slot="{ Component }">
       <Transition
