@@ -26,6 +26,13 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition;
     }
+    if (from.path === to.path) {
+      return {
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      };
+    }
     if (to.hash) {
       return;
     }
