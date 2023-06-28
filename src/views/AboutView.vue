@@ -1,9 +1,12 @@
 <script setup>
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
+import useAppTitle from "@/composables/useAppTitle";
 import { computed } from "vue";
 import IconAustralia from "@/components/icons/countries/IconAustralia.vue";
 import IconCanada from "@/components/icons/countries/IconCanada.vue";
 import IconUK from "@/components/icons/countries/IconUK.vue";
+
+useAppTitle("About Us");
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const smAndLarger = breakpoints.greaterOrEqual("sm");
@@ -11,13 +14,13 @@ const lgAndLarger = breakpoints.greaterOrEqual("lg");
 
 const commitmentImg = computed(() => {
   return `src/assets/images/about/${
-    lgAndLarger.value ? "desktop" : (smAndLarger.value ? "tablet" : "mobile")
+    lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
   }/image-commitment.jpg`;
 });
 
 const qualityImg = computed(() => {
   return `src/assets/images/about/${
-    lgAndLarger.value ? "desktop" : (smAndLarger.value ? "tablet" : "mobile")
+    lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
   }/image-quality.jpg`;
 });
 
@@ -46,7 +49,7 @@ const headquarters = [
     region: "Victoria",
     phone: "+61 4 9928 3629",
   },
-]
+];
 </script>
 
 <template>
@@ -66,9 +69,17 @@ const headquarters = [
     </section>
 
     <!-- Our Commitment -->
-    <section class="w-full lg:extra-padding flex flex-col sm:flex-row items-center gap-16 lg:gap-28">
-      <img :src="commitmentImg" alt="a barista pouring milk on a cup of coffee" class="rounded-md" />
-      <div class="text-center sm:text-left flex flex-col justify-center items-center sm:items-start gap-10">
+    <section
+      class="w-full lg:extra-padding flex flex-col sm:flex-row items-center gap-16 lg:gap-28"
+    >
+      <img
+        :src="commitmentImg"
+        alt="a barista pouring milk on a cup of coffee"
+        class="rounded-md"
+      />
+      <div
+        class="text-center sm:text-left flex flex-col justify-center items-center sm:items-start gap-10"
+      >
         <h2 class="text-[32px] lg:text-[40px]">Our commitment</h2>
         <p>
           We're built on a simple mission and a commitment to doing good along the way. We want to
@@ -85,12 +96,24 @@ const headquarters = [
     </section>
 
     <!-- Quality -->
-    <section class="w-full mt-[calc(120px_+_min(120px,18vw))] sm:mt-[calc(140px_+_min(150px,18vw))] lg:mt-[250px] bg-dark-grey-bg rounded-lg extra-padding pb-20 flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-28">
-      <img :src="qualityImg" alt="a barista pouring milk on a cup of coffee" class="rounded-md -mt-[min(120px,_18vw)] sm:-mt-[min(150px,_18vw)] lg:-mt-20" />
-      <div class="lg:pt-10 text-center lg:text-left text-light-beige flex flex-col justify-center items-center lg:items-start gap-10">
+    <section
+      class="w-full mt-[calc(120px_+_min(120px,18vw))] sm:mt-[calc(140px_+_min(150px,18vw))] lg:mt-[250px] bg-dark-grey-bg rounded-lg extra-padding pb-20 flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-28"
+    >
+      <img
+        :src="qualityImg"
+        alt="a barista pouring milk on a cup of coffee"
+        class="rounded-md -mt-[min(120px,_18vw)] sm:-mt-[min(150px,_18vw)] lg:-mt-20"
+      />
+      <div
+        class="lg:pt-10 text-center lg:text-left text-light-beige flex flex-col justify-center items-center lg:items-start gap-10"
+      >
         <h2 class="text-[28px] sm:text-[32px] lg:text-[40px]">Uncompromising quality</h2>
         <p>
-          Although we work with growers who pay close attention to all stages of harvest and processing, we employ, on our end, a rigorous quality control program to avoid over-roasting or baking the coffee dry. Every bag of coffee is tagged with a roast date and batch number. Our goal is to roast consistent, user-friendly coffee, so that brewing is easy and enjoyable.
+          Although we work with growers who pay close attention to all stages of harvest and
+          processing, we employ, on our end, a rigorous quality control program to avoid
+          over-roasting or baking the coffee dry. Every bag of coffee is tagged with a roast date
+          and batch number. Our goal is to roast consistent, user-friendly coffee, so that brewing
+          is easy and enjoyable.
         </p>
       </div>
     </section>
@@ -99,16 +122,21 @@ const headquarters = [
     <section class="w-full extra-padding sm:max-lg:px-0">
       <h2 class="mb-[70px] text-grey-text text-2xl text-center sm:text-left">Our heardquarters</h2>
       <div class="grid gap-20 sm:gap-10 grid-rows-3 sm:grid-cols-3 sm:grid-rows-1">
-        <div v-for="head in headquarters" :key="head.country" class="text-center sm:text-left flex flex-col items-center sm:items-start">
+        <div
+          v-for="head in headquarters"
+          :key="head.country"
+          class="text-center sm:text-left flex flex-col items-center sm:items-start"
+        >
           <component :is="head.icon" class="mb-12"></component>
-          <h3 class="text-[28px] sm:text-2xl lg:text-[32px] mb-6 sm:max-lg:mb-5">{{ head.country }}</h3>
+          <h3 class="text-[28px] sm:text-2xl lg:text-[32px] mb-6 sm:max-lg:mb-5">
+            {{ head.country }}
+          </h3>
           <p>{{ head.address }}</p>
           <p>{{ head.city }}</p>
           <p>{{ head.region }}</p>
           <p>{{ head.phone }}</p>
         </div>
       </div>
-
     </section>
   </main>
 </template>

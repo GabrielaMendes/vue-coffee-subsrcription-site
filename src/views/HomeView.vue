@@ -1,8 +1,11 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import useAppTitle from "@/composables/useAppTitle"
 import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue";
 import IconGift from "@/components/icons/IconGift.vue";
 import IconTruck from "@/components/icons/IconTruck.vue";
+
+useAppTitle("Home");
 
 const coffees = [
   {
@@ -81,7 +84,7 @@ const steps = [
           Start your mornings with the world's best coffees. Try our expertly curated artisan
           coffees from our best roasters delivered directly to your door, at your schedule.
         </p>
-        <RouterLink role="button" class="app-button sm:mr-auto" :to="{name: 'create'}">
+        <RouterLink role="button" class="app-button sm:mr-auto" :to="{ name: 'create' }">
           <span class="text-lg font-fraunces font-black"> Create your plan </span>
         </RouterLink>
       </div>
@@ -168,7 +171,7 @@ const steps = [
           <p>{{ step.description }}</p>
         </div>
       </div>
-      <RouterLink role="button" class="app-button max-sm:mx-auto" :to="{name: 'create'}">
+      <RouterLink role="button" class="app-button max-sm:mx-auto" :to="{ name: 'create' }">
         <span class="text-lg font-fraunces font-black"> Create your plan </span>
       </RouterLink>
     </section>

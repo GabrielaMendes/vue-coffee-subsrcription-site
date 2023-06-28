@@ -1,6 +1,9 @@
 <script setup>
 import { computed, ref } from "vue";
+import useAppTitle from "@/composables/useAppTitle"
 import IconArrow from "@/components/icons/IconArrow.vue";
+
+useAppTitle("Create Your Plan");
 
 const preference = ref("");
 const beanType = ref("");
