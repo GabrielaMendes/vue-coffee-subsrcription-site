@@ -1,4 +1,18 @@
 <script setup>
+import { computed, ref } from "vue";
+import IconArrow from "@/components/icons/IconArrow.vue";
+
+const preference = ref("");
+const beanType = ref("");
+const quantity = ref("");
+const grindOption = ref("");
+const delivery = ref("");
+
+const currentStep = ref("01");
+const grindDisabled = computed(() => {
+  return preference.value === "Capsule";
+});
+
 const steps = [
   {
     number: "01",
@@ -116,7 +130,7 @@ const formSteps = [
       },
     ],
   },
-]
+];
 </script>
 
 <template>
@@ -128,19 +142,22 @@ const formSteps = [
       >
         <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
         <p>
-          Build a subscription plan that best fits your needs. We offer an assortment of the best artisan coffees from around the globe delivered fresh to your door.
+          Build a subscription plan that best fits your needs. We offer an assortment of the best
+          artisan coffees from around the globe delivered fresh to your door.
         </p>
       </div>
     </section>
 
     <!-- Steps -->
-    <section class="w-[calc(100%_+_72px)] sm:w-full max-sm:-ml-9 rounded-lg bg-dark-grey-bg text-light-beige text-center sm:text-left extra-padding">
+    <section
+      class="w-[calc(100%_+_72px)] sm:w-full max-sm:-ml-9 rounded-lg bg-dark-grey-bg text-light-beige text-center sm:text-left extra-padding"
+    >
       <div class="py-20 w-full max-w-[1045px]">
         <div class="max-sm:mb-20 sm:grid sm:grid-cols-3 sm:gap-5 lg:gap-20">
-            <span
-              class="max-sm:hidden border-b-[3px] border-light-salmon  ml-3.5 col-span-2 sm:w-[calc(100%_+_23px)] lg:w-[calc(100%_+_83px)]"
-            ></span>
-            <span class="max-sm:hidden col-span-1"></span>
+          <span
+            class="max-sm:hidden border-b-[3px] border-light-salmon ml-3.5 col-span-2 sm:w-[calc(100%_+_23px)] lg:w-[calc(100%_+_83px)]"
+          ></span>
+          <span class="max-sm:hidden col-span-1"></span>
           <div v-for="step in steps" :key="step.number" class="mb-14 flex-1">
             <div
               class="max-sm:hidden mb-14 w-[31px] h-[31px] rounded-full border-2 border-primary-green relative z-10 sm:-mt-[37px] lg:-mt-[97px]"
@@ -150,6 +167,42 @@ const formSteps = [
             </div>
             <h3 class="text-[28px] lg:text-[32px] mb-6">{{ step.name }}</h3>
             <p>{{ step.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form  -->
+    <section class="w-full">
+      <div v-for="step in formSteps" :key="step.number" class="flex items-start gap-10">
+        <!-- Form menu -->
+        <div
+          class="hidden lg:flex flex-col w-[255px] cursor-pointer border-t"
+          :class="{
+            'border-none': step.number === '01',
+            'cursor-default': step.number === '04' && grindDisabled,
+          }"
+        >
+          <h2
+            class="text-2xl mb-4 pt-4 opacity-40 hover:opacity-60 transition-opacity duration-200 ease-linear"
+            :class="{
+              'opacity-95': currentStep === step.number,
+              'opacity-20 hover:opacity-20': step.number === '04' && grindDisabled,
+            }"
+          >
+            <span
+              class="text-grey-text mr-6"
+              :class="{ 'text-primary-green': step.number === '01' }"
+              >{{ step.number }}</span
+            >
+            {{ step.name }}
+          </h2>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-2xl sm:text-[32px] lg:text-[40px]"></h2>
+            <IconArrow />
           </div>
         </div>
       </div>
