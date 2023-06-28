@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import useAppTitle from "@/composables/useAppTitle"
+import useAppTitle from "@/composables/useAppTitle";
 import IconArrow from "@/components/icons/IconArrow.vue";
 
 useAppTitle("Create Your Plan");
@@ -42,6 +42,7 @@ const formSteps = [
     number: "01",
     name: "Preferences",
     question: "How do you drink your coffee?",
+    model: preference,
     options: [
       {
         title: "Capsule",
@@ -61,6 +62,7 @@ const formSteps = [
     number: "02",
     name: "Bean type",
     question: "What type of coffee?",
+    model: beanType,
     options: [
       {
         title: "Single origin",
@@ -80,6 +82,7 @@ const formSteps = [
     number: "03",
     name: "Quantity",
     question: "How much would you like?",
+    model: quantity,
     options: [
       {
         title: "250g",
@@ -99,6 +102,7 @@ const formSteps = [
     number: "04",
     name: "Grind option",
     question: "Want us to grind them?",
+    model: grindOption,
     options: [
       {
         title: "Wholebean",
@@ -118,6 +122,7 @@ const formSteps = [
     number: "05",
     name: "Deliveries",
     question: "How often should we deliver?",
+    model: delivery,
     options: [
       {
         title: "Every week",
@@ -177,37 +182,65 @@ const formSteps = [
 
     <!-- Form  -->
     <section class="w-full">
-      <div v-for="step in formSteps" :key="step.number" class="flex items-start gap-10">
+      <div class="sm:extra-padding flex items-start justify-between gap-8">
         <!-- Form menu -->
-        <div
-          class="hidden lg:flex flex-col w-[255px] cursor-pointer border-t"
-          :class="{
-            'border-none': step.number === '01',
-            'cursor-default': step.number === '04' && grindDisabled,
-          }"
-        >
-          <h2
-            class="text-2xl mb-4 pt-4 opacity-40 hover:opacity-60 transition-opacity duration-200 ease-linear"
+        <div class="hidden lg:block w-[255px] min-w-[228px]">
+          <div
+            v-for="step in formSteps"
+            :key="step.number"
+            class="cursor-pointer border-t"
             :class="{
-              'opacity-95': currentStep === step.number,
-              'opacity-20 hover:opacity-20': step.number === '04' && grindDisabled,
+              'border-none': step.number === '01',
+              'cursor-default': step.number === '04' && grindDisabled,
             }"
           >
-            <span
-              class="text-grey-text mr-6"
-              :class="{ 'text-primary-green': step.number === '01' }"
-              >{{ step.number }}</span
+            <h2
+              class="text-2xl mb-4 pt-4 opacity-40 hover:opacity-60 transition-opacity duration-200 ease-linear"
+              :class="{
+                'opacity-95': currentStep === step.number,
+                'opacity-20 hover:opacity-20': step.number === '04' && grindDisabled,
+              }"
             >
-            {{ step.name }}
-          </h2>
-        </div>
-
-        <div>
-          <div class="flex items-center justify-between">
-            <h2 class="text-2xl sm:text-[32px] lg:text-[40px]"></h2>
-            <IconArrow />
+              <span
+                class="text-grey-text mr-6"
+                :class="{ 'text-primary-green': step.number === '01' }"
+                >{{ step.number }}</span
+              >
+              {{ step.name }}
+            </h2>
           </div>
         </div>
+
+        <form @submit.prevent="" class="max-w-[740px]">
+          <fieldset v-for="step in formSteps" :key="step.number">
+            <div class="flex items-center justify-between mb-10">
+              <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
+                {{ step.question }}
+              </legend>
+              <IconArrow />
+            </div>
+
+            <div class="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6 mb-28">
+              <div v-for="option in step.options" :key="option.title" class="sm:min-h-[250px]">
+                <input
+                  class="peer appearance-none"
+                  :value="option.title"
+                  type="radio"
+                  v-model="step.model"
+                  :name="step.name"
+                  :id="`${step.number}-${option.title}`"
+                />
+                <label
+                  :for="`${step.number}-${option.title}`"
+                  class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
+                >
+                  <h3 class="text-2xl mb-3 sm:mb-8 break-words">{{ option.title }}</h3>
+                  <p>{{ option.description }}</p>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </form>
       </div>
     </section>
   </main>

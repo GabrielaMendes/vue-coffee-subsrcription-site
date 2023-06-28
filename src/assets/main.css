@@ -24,7 +24,8 @@ body {
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  legend {
     @apply font-fraunces font-black leading-none md:leading-tight lg:leading-snug;
   }
 
