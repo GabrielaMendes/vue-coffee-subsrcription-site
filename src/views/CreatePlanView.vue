@@ -188,6 +188,11 @@ const toggleField = (field) => {
   currentStep.value = field;
 };
 
+const menuNavigate = (field) => {
+  document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  toggleField(field);
+}
+
 onMounted(() => toggleField("01"));
 </script>
 
@@ -240,7 +245,7 @@ onMounted(() => toggleField("01"));
             v-for="step in formSteps"
             :key="step.number"
             class="w-full text-left border-t cursor-pointer disabled:pointer-events-none"
-            @click="toggleField(step.number)"
+            @click="menuNavigate(step.number)"
             :class="{
               'border-none': step.number === '01',
             }"
@@ -264,7 +269,7 @@ onMounted(() => toggleField("01"));
         </div>
 
         <form @submit.prevent="" class="max-w-[740px]">
-          <fieldset v-for="step in formSteps" :key="step.number" class="mb-16 sm:mb-20">
+          <fieldset v-for="step in formSteps" :key="step.number" :id="`field-${step.number}`" class="mb-16 sm:mb-20">
             <div
               @click="toggleField(step.number)"
               class="flex items-center justify-between mb-10 lg:mb-14"
