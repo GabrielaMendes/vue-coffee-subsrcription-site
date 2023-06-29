@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import useAppTitle from "@/composables/useAppTitle";
 import IconArrow from "@/components/icons/IconArrow.vue";
+import TransitionExpand from "@/components/TransitionExpand.vue";
 
 useAppTitle("Create Your Plan");
 
@@ -55,6 +56,7 @@ const formSteps = [
     name: "Preferences",
     question: "How do you drink your coffee?",
     model: preference,
+    expanded: ref(false),
     options: [
       {
         title: "Capsule",
@@ -75,6 +77,7 @@ const formSteps = [
     name: "Bean type",
     question: "What type of coffee?",
     model: beanType,
+    expanded: ref(false),
     options: [
       {
         title: "Single origin",
@@ -95,6 +98,7 @@ const formSteps = [
     name: "Quantity",
     question: "How much would you like?",
     model: quantity,
+    expanded: ref(false),
     options: [
       {
         title: "250g",
@@ -115,6 +119,7 @@ const formSteps = [
     name: "Grind option",
     question: "Want us to grind them?",
     model: grindOption,
+    expanded: ref(false),
     options: [
       {
         title: "Wholebean",
@@ -135,6 +140,7 @@ const formSteps = [
     name: "Deliveries",
     question: "How often should we deliver?",
     model: delivery,
+    expanded: ref(false),
     options: [
       {
         title: "Every week",
@@ -170,18 +176,15 @@ const toggleField = (field) => {
   }
 
   const arrow = document.getElementById(`arrow-${field}`);
-  const cards = document.getElementById(`cards-${field}`);
 
   if (arrow.classList.contains("open")) {
     arrow.classList.remove("open");
-    cards.classList.add("hidden");
-    cards.classList.remove("grid");
   } else {
     arrow.classList.add("open");
-    cards.classList.add("grid");
-    cards.classList.remove("hidden");
   }
 
+  const step = formSteps.find(step => step.number === field)
+  step.expanded.value = !step.expanded.value
   currentStep.value = field;
 };
 
@@ -260,10 +263,11 @@ onMounted(() => toggleField("01"));
         </div>
 
         <form @submit.prevent="" class="max-w-[740px]">
-          <fieldset v-for="step in formSteps" :key="step.number" class="mb-14">
+          <fieldset v-for="step in formSteps" :key="step.number" class="mb-16 sm:mb-20">
             <div
               @click="toggleField(step.number)"
-              class="flex items-center justify-between mb-10 cursor-pointer"
+              class="flex items-center justify-between mb-10 lg:mb-14"
+              :class="(step.number === '04' && grindDisabled) ? ' opacity-50 cursor-default' : ' cursor-pointer'"
             >
               <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
                 {{ step.question }}
@@ -271,30 +275,32 @@ onMounted(() => toggleField("01"));
               <IconArrow :id="`arrow-${step.number}`" class="arrow-down" />
             </div>
 
-            <div
-              :id="`cards-${step.number}`"
-              class="hidden grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6 mb-16"
-              :class="(step.number === '04' && grindDisabled) ? ' opacity-50 cursor-default' : ''"
-            >
-              <div v-for="option in step.options" :key="option.title" class="sm:min-h-[250px]">
-                <input
-                  type="radio"
-                  :id="`${step.number}-${option.title}`"
-                  :name="step.name"
-                  :value="option.title"
-                  v-model="step.model.value"
-                  class="peer appearance-none"
-                />
-                <label
-                  :for="`${step.number}-${option.title}`"
-                  @click="currentStep = step.number"
-                  class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
-                >
-                  <h3 class="text-2xl mb-3 sm:mb-8 break-words">{{ option.title }}</h3>
-                  <p>{{ option.description }}</p>
-                </label>
+            <TransitionExpand>
+              <div
+                v-show="step.expanded.value"
+                :id="`cards-${step.number}`"
+                class="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6"
+              >
+                <div v-for="option in step.options" :key="option.title" class="sm:min-h-[250px]">
+                  <input
+                    type="radio"
+                    :id="`${step.number}-${option.title}`"
+                    :name="step.name"
+                    :value="option.title"
+                    v-model="step.model.value"
+                    class="peer appearance-none hidden"
+                  />
+                  <label
+                    :for="`${step.number}-${option.title}`"
+                    @click="currentStep = step.number"
+                    class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
+                  >
+                    <h3 class="text-2xl mb-3 sm:bm-8 break-words">{{ option.title }}</h3>
+                    <p>{{ option.description }}</p>
+                  </label>
+                </div>
               </div>
-            </div>
+            </TransitionExpand>
           </fieldset>
 
           <div class="rounded-md mb-10 bg-dark-grey-bg py-8 px-6 md:px-14">

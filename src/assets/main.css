@@ -18,11 +18,11 @@ body {
   @apply h-[400px] lg:h-[450px] bg-cover bg-right bg-[url('src/assets/images/plan/mobile/image-hero-blackcup.jpg')] sm:bg-[url('src/assets/images/plan/tablet/image-hero-blackcup.jpg')] lg:bg-[url('src/assets/images/plan/desktop/image-hero-blackcup.jpg')];
 }
 
-.arrow-down{
-  @apply rotate-0 transition-transform duration-300 ease-linear
+.arrow-down {
+  @apply rotate-0 transition-transform duration-300 ease-linear;
 }
 
-.arrow-down.open{
+.arrow-down.open {
   @apply rotate-180;
 }
 
