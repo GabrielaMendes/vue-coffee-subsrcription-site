@@ -5,15 +5,27 @@ import IconArrow from "@/components/icons/IconArrow.vue";
 
 useAppTitle("Create Your Plan");
 
-const preference = ref("");
-const beanType = ref("");
-const quantity = ref("");
-const grindOption = ref("");
-const delivery = ref("");
+const preference = ref("_____");
+const beanType = ref("_____");
+const quantity = ref("_____");
+const grindOption = ref("_____");
+const delivery = ref("_____");
 
 const currentStep = ref("01");
 const grindDisabled = computed(() => {
   return preference.value === "Capsule";
+});
+
+const orderSummary = computed(() => {
+  return `“I drink my coffee as <span class='text-primary-green'>${
+    preference.value
+  }</span>, with a <span class='text-primary-green'>${
+    beanType.value
+  }</span> type of bean. <span class='text-primary-green'>${quantity.value}</span>${
+    preference.value === "Capsule"
+      ? ""
+      : ` ground ala <span class='text-primary-green'>${grindOption.value}</span>`
+  }, sent to me <span class='text-primary-green'>${delivery.value}</span>.”`;
 });
 
 const steps = [
@@ -150,8 +162,8 @@ const formSteps = [
       >
         <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
         <p>
-          Build a subscription plan that best fits your needs. We offer an assortment of the best
-          artisan coffees from around the globe delivered fresh to your door.
+          Build a subscription plan that best fits your needs. We offer an assortment of the
+          bdel="picked"est artisan coffees from around the globe delivered fresh to your door.
         </p>
       </div>
     </section>
@@ -220,15 +232,17 @@ const formSteps = [
               <IconArrow />
             </div>
 
-            <div class="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6 mb-28">
+            <div
+              class="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6 mb-28"
+            >
               <div v-for="option in step.options" :key="option.title" class="sm:min-h-[250px]">
                 <input
-                  class="peer appearance-none"
-                  :value="option.title"
                   type="radio"
-                  v-model="step.model"
-                  :name="step.name"
                   :id="`${step.number}-${option.title}`"
+                  :name="step.name"
+                  :value="option.title"
+                  v-model="step.model"
+                  class="peer appearance-none"
                 />
                 <label
                   :for="`${step.number}-${option.title}`"
@@ -240,6 +254,18 @@ const formSteps = [
               </div>
             </div>
           </fieldset>
+
+          <div class="rounded-md mb-10 bg-dark-grey-bg py-8 px-6 md:px-14">
+            <div class="uppercase text-grey-text mb-4">Order Summary</div>
+            <h6 class="text-2xl text-light-beige" v-html="orderSummary"></h6>
+          </div>
+
+          <button
+            type="submit"
+            class="app-button mx-auto lg:mr-0 lg:ml-auto text-lg font-fraunces font-black"
+          >
+            Create my plan!
+          </button>
         </form>
       </div>
     </section>
