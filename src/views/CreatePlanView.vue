@@ -163,6 +163,15 @@ const buttonDisabled = computed(() => {
   }
   return false;
 });
+
+const toggleField = (field) => {
+  const arrow = document.getElementById(`arrow-${field}`)
+  if (arrow.classList.contains("open")) {
+    arrow.classList.remove("open")
+  } else {
+    arrow.classList.add("open")
+  }
+}
 </script>
 
 <template>
@@ -237,11 +246,11 @@ const buttonDisabled = computed(() => {
 
         <form @submit.prevent="" class="max-w-[740px]">
           <fieldset v-for="step in formSteps" :key="step.number">
-            <div class="flex items-center justify-between mb-10">
+            <div @click="toggleField(step.number)" class="flex items-center justify-between mb-10 cursor-pointer">
               <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
                 {{ step.question }}
               </legend>
-              <IconArrow />
+              <IconArrow :id="`arrow-${step.number}`" class="arrow-down" />
             </div>
 
             <div

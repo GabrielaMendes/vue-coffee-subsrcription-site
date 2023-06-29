@@ -18,6 +18,16 @@ body {
   @apply h-[400px] lg:h-[450px] bg-cover bg-right bg-[url('src/assets/images/plan/mobile/image-hero-blackcup.jpg')] sm:bg-[url('src/assets/images/plan/tablet/image-hero-blackcup.jpg')] lg:bg-[url('src/assets/images/plan/desktop/image-hero-blackcup.jpg')];
 }
 
+.arrow-down{
+  transform: rotate(0deg);
+  transition: transform 300ms linear;
+}
+
+.arrow-down.open{
+  transform: rotate(180deg);
+  transition: transform 300ms linear;
+}
+
 @layer base {
   h1,
   h2,
