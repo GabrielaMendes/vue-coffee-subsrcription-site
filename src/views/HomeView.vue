@@ -85,7 +85,7 @@ const steps = [
           coffees from our best roasters delivered directly to your door, at your schedule.
         </p>
         <RouterLink role="button" class="app-button sm:mr-auto" :to="{ name: 'create' }">
-          <span class="text-lg font-fraunces font-black"> Create your plan </span>
+          Create your plan
         </RouterLink>
       </div>
     </section>
@@ -172,7 +172,7 @@ const steps = [
         </div>
       </div>
       <RouterLink role="button" class="app-button max-sm:mx-auto" :to="{ name: 'create' }">
-        <span class="text-lg font-fraunces font-black"> Create your plan </span>
+        Create your plan
       </RouterLink>
     </section>
   </main>

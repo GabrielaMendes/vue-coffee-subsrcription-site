@@ -324,7 +324,7 @@ onMounted(() => toggleField("01"));
           <button
             :disabled="buttonDisabled"
             type="submit"
-            class="app-button mx-auto lg:mr-0 lg:ml-auto text-lg font-fraunces font-black"
+            class="app-button mx-auto lg:mr-0 lg:ml-auto"
           >
             Create my plan!
           </button>
