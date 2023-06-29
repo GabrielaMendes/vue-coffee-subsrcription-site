@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import useAppTitle from "@/composables/useAppTitle";
 import IconArrow from "@/components/icons/IconArrow.vue";
 
@@ -11,7 +11,7 @@ const quantity = ref("_____");
 const grindOption = ref("_____");
 const delivery = ref("_____");
 
-const currentStep = ref("01");
+const currentStep = ref("");
 const grindDisabled = computed(() => {
   return preference.value === "Capsule";
 });
@@ -23,8 +23,8 @@ const orderSummary = computed(() => {
     beanType.value
   }</span> type of bean. <span class='text-primary-green'>${quantity.value}</span>${
     preference.value === "Capsule"
-    ? ""
-    : ` ground ala <span class='text-primary-green'>${grindOption.value}</span>`
+      ? ""
+      : ` ground ala <span class='text-primary-green'>${grindOption.value}</span>`
   }, sent to me <span class='text-primary-green'>${delivery.value}</span>.”`;
 });
 
@@ -33,19 +33,19 @@ const steps = [
     number: "01",
     name: "Pick your coffee",
     description:
-    "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
+      "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
   },
   {
     number: "02",
     name: "Choose the frequency",
     description:
-    "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
+      "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
   },
   {
     number: "03",
     name: "Receive and enjoy!",
     description:
-    "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
+      "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
   },
 ];
 
@@ -165,13 +165,27 @@ const buttonDisabled = computed(() => {
 });
 
 const toggleField = (field) => {
-  const arrow = document.getElementById(`arrow-${field}`)
-  if (arrow.classList.contains("open")) {
-    arrow.classList.remove("open")
-  } else {
-    arrow.classList.add("open")
+  if (field === "04" && grindDisabled.value) {
+    return;
   }
-}
+
+  const arrow = document.getElementById(`arrow-${field}`);
+  const cards = document.getElementById(`cards-${field}`);
+
+  if (arrow.classList.contains("open")) {
+    arrow.classList.remove("open");
+    cards.classList.add("hidden");
+    cards.classList.remove("grid");
+  } else {
+    arrow.classList.add("open");
+    cards.classList.add("grid");
+    cards.classList.remove("hidden");
+  }
+
+  currentStep.value = field;
+};
+
+onMounted(() => toggleField("01"));
 </script>
 
 <template>
@@ -179,10 +193,10 @@ const toggleField = (field) => {
     <!-- Hero -->
     <section class="w-full hero-plan-bg rounded-lg extra-padding">
       <div
-      class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
+        class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
       >
-      <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
-      <p>
+        <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
+        <p>
           Build a subscription plan that best fits your needs. We offer an assortment of the
           bdel="picked"est artisan coffees from around the globe delivered fresh to your door.
         </p>
@@ -222,6 +236,7 @@ const toggleField = (field) => {
             v-for="step in formSteps"
             :key="step.number"
             class="cursor-pointer border-t"
+            @click="toggleField(step.number)"
             :class="{
               'border-none': step.number === '01',
               'cursor-default': step.number === '04' && grindDisabled,
@@ -245,8 +260,11 @@ const toggleField = (field) => {
         </div>
 
         <form @submit.prevent="" class="max-w-[740px]">
-          <fieldset v-for="step in formSteps" :key="step.number">
-            <div @click="toggleField(step.number)" class="flex items-center justify-between mb-10 cursor-pointer">
+          <fieldset v-for="step in formSteps" :key="step.number" class="mb-14">
+            <div
+              @click="toggleField(step.number)"
+              class="flex items-center justify-between mb-10 cursor-pointer"
+            >
               <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
                 {{ step.question }}
               </legend>
@@ -254,7 +272,9 @@ const toggleField = (field) => {
             </div>
 
             <div
-              class="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6 mb-28"
+              :id="`cards-${step.number}`"
+              class="hidden grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6 mb-16"
+              :class="(step.number === '04' && grindDisabled) ? ' opacity-50 cursor-default' : ''"
             >
               <div v-for="option in step.options" :key="option.title" class="sm:min-h-[250px]">
                 <input
@@ -267,6 +287,7 @@ const toggleField = (field) => {
                 />
                 <label
                   :for="`${step.number}-${option.title}`"
+                  @click="currentStep = step.number"
                   class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
                 >
                   <h3 class="text-2xl mb-3 sm:mb-8 break-words">{{ option.title }}</h3>
