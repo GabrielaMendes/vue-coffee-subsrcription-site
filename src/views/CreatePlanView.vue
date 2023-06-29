@@ -183,8 +183,8 @@ const toggleField = (field) => {
     arrow.classList.add("open");
   }
 
-  const step = formSteps.find(step => step.number === field)
-  step.expanded.value = !step.expanded.value
+  const step = formSteps.find((step) => step.number === field);
+  step.expanded.value = !step.expanded.value;
   currentStep.value = field;
 };
 
@@ -235,21 +235,22 @@ onMounted(() => toggleField("01"));
       <div class="sm:extra-padding flex items-start justify-between gap-8">
         <!-- Form menu -->
         <div class="hidden lg:block w-[255px] min-w-[228px]">
-          <div
+          <button
+            :disabled="step.number === '04' && grindDisabled"
             v-for="step in formSteps"
             :key="step.number"
-            class="cursor-pointer border-t"
+            class="w-full text-left border-t cursor-pointer disabled:pointer-events-none"
             @click="toggleField(step.number)"
             :class="{
               'border-none': step.number === '01',
-              'cursor-default': step.number === '04' && grindDisabled,
             }"
           >
             <h2
-              class="text-2xl mb-4 pt-4 opacity-40 hover:opacity-60 transition-opacity duration-200 ease-linear"
+              class="text-2xl mb-4 pt-4 hover:opacity-60 transition-opacity duration-200 ease-linear"
               :class="{
+                'opacity-20': step.number === '04' && grindDisabled,
+                'opacity-40': step.number !== '04' || !grindDisabled,
                 'opacity-95': currentStep === step.number,
-                'opacity-20 hover:opacity-20': step.number === '04' && grindDisabled,
               }"
             >
               <span
@@ -259,7 +260,7 @@ onMounted(() => toggleField("01"));
               >
               {{ step.name }}
             </h2>
-          </div>
+          </button>
         </div>
 
         <form @submit.prevent="" class="max-w-[740px]">
@@ -267,7 +268,11 @@ onMounted(() => toggleField("01"));
             <div
               @click="toggleField(step.number)"
               class="flex items-center justify-between mb-10 lg:mb-14"
-              :class="(step.number === '04' && grindDisabled) ? ' opacity-50 cursor-default' : ' cursor-pointer'"
+              :class="
+                step.number === '04' && grindDisabled
+                  ? ' opacity-50 cursor-default'
+                  : ' cursor-pointer'
+              "
             >
               <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
                 {{ step.question }}
