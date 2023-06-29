@@ -19,13 +19,11 @@ body {
 }
 
 .arrow-down{
-  transform: rotate(0deg);
-  transition: transform 300ms linear;
+  @apply rotate-0 transition-transform duration-300 ease-linear
 }
 
 .arrow-down.open{
-  transform: rotate(180deg);
-  transition: transform 300ms linear;
+  @apply rotate-180;
 }
 
 @layer base {
