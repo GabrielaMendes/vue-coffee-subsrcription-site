@@ -241,7 +241,7 @@ const formSteps = [
                   :id="`${step.number}-${option.title}`"
                   :name="step.name"
                   :value="option.title"
-                  v-model="step.model"
+                  v-model="step.model.value"
                   class="peer appearance-none"
                 />
                 <label
