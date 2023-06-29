@@ -13,6 +13,7 @@ const grindOption = ref("_____");
 const delivery = ref("_____");
 
 const currentStep = ref("");
+
 const grindDisabled = computed(() => {
   return preference.value === "Capsule";
 });
@@ -317,7 +318,7 @@ onMounted(() => toggleField("01"));
 
           <div class="rounded-md mb-10 bg-dark-grey-bg py-8 px-6 md:px-14">
             <div class="uppercase text-grey-text mb-4">Order Summary</div>
-            <h6 class="text-2xl text-light-beige" v-html="orderSummary"></h6>
+            <h6 class="text-2xl text-light-beige leading-relaxed" v-html="orderSummary"></h6>
           </div>
 
           <button
