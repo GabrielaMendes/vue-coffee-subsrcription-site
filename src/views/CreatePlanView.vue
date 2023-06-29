@@ -23,8 +23,8 @@ const orderSummary = computed(() => {
     beanType.value
   }</span> type of bean. <span class='text-primary-green'>${quantity.value}</span>${
     preference.value === "Capsule"
-      ? ""
-      : ` ground ala <span class='text-primary-green'>${grindOption.value}</span>`
+    ? ""
+    : ` ground ala <span class='text-primary-green'>${grindOption.value}</span>`
   }, sent to me <span class='text-primary-green'>${delivery.value}</span>.”`;
 });
 
@@ -33,19 +33,19 @@ const steps = [
     number: "01",
     name: "Pick your coffee",
     description:
-      "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
+    "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
   },
   {
     number: "02",
     name: "Choose the frequency",
     description:
-      "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
+    "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
   },
   {
     number: "03",
     name: "Receive and enjoy!",
     description:
-      "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
+    "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
   },
 ];
 
@@ -151,6 +151,18 @@ const formSteps = [
     ],
   },
 ];
+
+const buttonDisabled = computed(() => {
+  for (let step of formSteps) {
+    if (step.number === "04" && grindDisabled.value) {
+      continue;
+    }
+    if (step.model.value === "_____") {
+      return true;
+    }
+  }
+  return false;
+});
 </script>
 
 <template>
@@ -158,10 +170,10 @@ const formSteps = [
     <!-- Hero -->
     <section class="w-full hero-plan-bg rounded-lg extra-padding">
       <div
-        class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
+      class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
       >
-        <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
-        <p>
+      <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
+      <p>
           Build a subscription plan that best fits your needs. We offer an assortment of the
           bdel="picked"est artisan coffees from around the globe delivered fresh to your door.
         </p>
@@ -261,6 +273,7 @@ const formSteps = [
           </div>
 
           <button
+            :disabled="buttonDisabled"
             type="submit"
             class="app-button mx-auto lg:mr-0 lg:ml-auto text-lg font-fraunces font-black"
           >
