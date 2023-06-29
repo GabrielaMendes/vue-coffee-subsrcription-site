@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import useAppTitle from "@/composables/useAppTitle";
 import IconArrow from "@/components/icons/IconArrow.vue";
 import TransitionExpand from "@/components/TransitionExpand.vue";
@@ -171,10 +171,6 @@ const buttonDisabled = computed(() => {
 });
 
 const toggleField = (field) => {
-  if (field === "04" && grindDisabled.value) {
-    return;
-  }
-
   const arrow = document.getElementById(`arrow-${field}`);
 
   if (arrow.classList.contains("open")) {
@@ -187,6 +183,12 @@ const toggleField = (field) => {
   step.expanded.value = !step.expanded.value;
   currentStep.value = field;
 };
+
+watch(grindDisabled, (newValue) => {
+  if (newValue && formSteps[3].expanded.value) {
+    toggleField("04")
+  }
+})
 
 const menuNavigate = (field) => {
   document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start"});
@@ -275,7 +277,7 @@ onMounted(() => toggleField("01"));
               class="flex items-center justify-between mb-10 lg:mb-14"
               :class="
                 step.number === '04' && grindDisabled
-                  ? ' opacity-50 cursor-default'
+                  ? ' opacity-50 pointer-events-none'
                   : ' cursor-pointer'
               "
             >
