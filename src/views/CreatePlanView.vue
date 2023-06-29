@@ -189,7 +189,7 @@ const toggleField = (field) => {
 };
 
 const menuNavigate = (field) => {
-  document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start"});
   toggleField(field);
 }
 
