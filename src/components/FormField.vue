@@ -25,9 +25,10 @@ const selected = computed({
     :id="`field-${step.number}`"
     class="mb-16 sm:mb-20"
   >
+    <!-- Header -->
     <div
       @click="emit('toggleCards', step.number)"
-      class="flex items-center justify-between mb-10 lg:mb-14"
+      class="flex items-center gap-2 justify-between mb-10 lg:mb-14"
       :class="
         step.number === '04' && grindDisabled
           ? ' opacity-50 pointer-events-none'
@@ -37,9 +38,10 @@ const selected = computed({
       <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
         {{ step.question }}
       </legend>
-      <IconArrow :id="`arrow-${step.number}`" class="arrow-down" />
+      <IconArrow :id="`arrow-${step.number}`" class="arrow-down shrink-0" />
     </div>
 
+    <!-- Cards -->
     <TransitionExpand>
       <div
         v-show="step.expanded.value"
