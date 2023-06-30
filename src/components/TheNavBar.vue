@@ -8,6 +8,14 @@ import IconClose from "./icons/IconClose.vue";
 const modalNav = ref(false);
 const toggleNav = () => {
   modalNav.value = !modalNav.value;
+  
+  if (modalNav.value) {
+    var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll = function() {window.scrollTo(x, y);};
+  } else {
+    window.onscroll = function() {};
+  }
 };
 </script>
 
@@ -43,20 +51,27 @@ const toggleNav = () => {
         <span class="hidden">Close menu</span>
       </div>
 
-      <div v-if="modalNav" class="absolute w-full top-full left-0">
-        <nav class="bg-light-beige flex flex-col items-center justify-center gap-10 py-10">
-          <RouterLink @click="toggleNav" :to="{ name: 'home' }">
-            <span class="mobile-menu-item">home</span>
-          </RouterLink>
-          <RouterLink @click="toggleNav" :to="{ name: 'about' }">
-            <span class="mobile-menu-item">about us</span>
-          </RouterLink>
-          <RouterLink @click="toggleNav" :to="{ name: 'create' }">
-            <span class="mobile-menu-item">create your plan</span>
-          </RouterLink>
-        </nav>
-        <div class="h-[calc(100svh_-_395px)] menu-gradient"></div>
-      </div>
+      <transition
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+        enter-active-class="transition-opacity duration-150 ease-in"
+        leave-active-class="transition-opacity duration-150 ease-in"
+      >
+        <div v-if="modalNav" class="absolute w-screen top-full -left-9">
+          <nav class="bg-light-beige flex flex-col items-center justify-center gap-10 py-10">
+            <RouterLink @click="toggleNav" :to="{ name: 'home' }">
+              <span class="mobile-menu-item">home</span>
+            </RouterLink>
+            <RouterLink @click="toggleNav" :to="{ name: 'about' }">
+              <span class="mobile-menu-item">about us</span>
+            </RouterLink>
+            <RouterLink @click="toggleNav" :to="{ name: 'create' }">
+              <span class="mobile-menu-item">create your plan</span>
+            </RouterLink>
+          </nav>
+          <div class="h-[calc(100svh_-_395px)] menu-gradient"></div>
+        </div>
+      </transition>
     </div>
   </header>
 </template>

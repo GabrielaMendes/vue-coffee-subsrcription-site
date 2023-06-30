@@ -58,6 +58,10 @@ body {
   .collection-gradient {
     @apply bg-gradient-to-t from-light-beige to-lighter-overlary;
   }
+
+  .stop-scrolling {
+    @apply h-full overflow-hidden;
+  }
 }
 
 @layer components {
