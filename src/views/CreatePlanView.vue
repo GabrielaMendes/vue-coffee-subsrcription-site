@@ -1,8 +1,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
 import useAppTitle from "@/composables/useAppTitle";
-import IconArrow from "@/components/icons/IconArrow.vue";
-import TransitionExpand from "@/components/TransitionExpand.vue";
+import FormField from "../components/FormField.vue";
 
 useAppTitle("Create Your Plan");
 
@@ -187,14 +186,14 @@ const toggleField = (field) => {
 
 watch(grindDisabled, (newValue) => {
   if (newValue && formSteps[3].expanded.value) {
-    toggleField("04")
+    toggleField("04");
   }
-})
+});
 
 const menuNavigate = (field) => {
-  document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start"});
+  document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start" });
   toggleField(field);
-}
+};
 
 onMounted(() => toggleField("01"));
 </script>
@@ -271,51 +270,12 @@ onMounted(() => toggleField("01"));
           </button>
         </div>
 
+        <!-- Options selection -->
         <form @submit.prevent="" class="max-w-[740px]">
-          <fieldset v-for="step in formSteps" :key="step.number" :id="`field-${step.number}`" class="mb-16 sm:mb-20">
-            <div
-              @click="toggleField(step.number)"
-              class="flex items-center justify-between mb-10 lg:mb-14"
-              :class="
-                step.number === '04' && grindDisabled
-                  ? ' opacity-50 pointer-events-none'
-                  : ' cursor-pointer'
-              "
-            >
-              <legend class="text-grey-text text-2xl sm:text-[32px] lg:text-[40px]">
-                {{ step.question }}
-              </legend>
-              <IconArrow :id="`arrow-${step.number}`" class="arrow-down" />
-            </div>
-
-            <TransitionExpand>
-              <div
-                v-show="step.expanded.value"
-                :id="`cards-${step.number}`"
-                class="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 gap-4 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-6"
-              >
-                <div v-for="option in step.options" :key="option.title" class="sm:min-h-[250px]">
-                  <input
-                    type="radio"
-                    :id="`${step.number}-${option.title}`"
-                    :name="step.name"
-                    :value="option.title"
-                    v-model="step.model.value"
-                    class="peer appearance-none hidden"
-                  />
-                  <label
-                    :for="`${step.number}-${option.title}`"
-                    @click="currentStep = step.number"
-                    class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
-                  >
-                    <h3 class="text-2xl mb-3 sm:bm-8 break-words">{{ option.title }}</h3>
-                    <p>{{ option.description }}</p>
-                  </label>
-                </div>
-              </div>
-            </TransitionExpand>
-          </fieldset>
-
+          <div v-for="step in formSteps" :key="step.number">
+            <FormField :step="step" v-model="step.model.value" @toggle-cards="toggleField" />
+          </div>
+          
           <div class="rounded-md mb-10 bg-dark-grey-bg py-8 px-6 md:px-14">
             <div class="uppercase text-grey-text mb-4">Order Summary</div>
             <h6 class="text-2xl text-light-beige leading-relaxed" v-html="orderSummary"></h6>
