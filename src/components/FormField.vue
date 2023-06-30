@@ -6,6 +6,7 @@ import TransitionExpand from "@/components/TransitionExpand.vue";
 const props = defineProps({
   modelValue: String,
   step: Object,
+  grindDisabled: Boolean,
 });
 
 const emit = defineEmits(["update:modelValue", "toggleCards"]);

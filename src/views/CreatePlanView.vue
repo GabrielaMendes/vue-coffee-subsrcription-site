@@ -278,7 +278,7 @@ onMounted(() => toggleField("01"));
         <!-- Options selection -->
         <form @submit.prevent="" class="max-w-[740px]">
           <div v-for="step in formSteps" :key="step.number">
-            <FormField :step="step" v-model="step.model.value" @toggle-cards="toggleField" />
+            <FormField :step="step" :grindDisabled="grindDisabled" v-model="step.model.value" @toggle-cards="toggleField" />
           </div>
           
           <div class="rounded-md mb-10 bg-dark-grey-bg py-8 px-6 md:px-14">
