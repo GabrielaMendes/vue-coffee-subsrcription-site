@@ -192,6 +192,11 @@ watch(grindDisabled, (newValue) => {
 
 const menuNavigate = (field) => {
   document.getElementById(`field-${field}`).scrollIntoView({ behavior: "smooth", block: "start" });
+  
+  const step = formSteps.find((step) => step.number === field);
+  if (step.expanded.value === true) {
+    return;
+  }
   toggleField(field);
 };
 
