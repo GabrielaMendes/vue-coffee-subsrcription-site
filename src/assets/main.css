@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-light-beige w-screen overflow-x-hidden font-barlow text-dark-bluish-gray-text text-[15px] lg:text-base;
+  @apply relative bg-light-beige w-screen overflow-x-hidden font-barlow text-dark-bluish-gray-text text-[15px] lg:text-base;
 }
 
 .hero-home-bg {
@@ -74,7 +74,7 @@ body {
   }
 
   .app-button {
-    @apply bg-primary-green text-light-beige text-lg font-fraunces font-black w-[218px] h-14 rounded-md hover:bg-secondary-green hover-transition flex items-center justify-center disabled:bg-dark-greyish-cream;
+    @apply bg-primary-green text-light-beige text-lg font-fraunces font-black min-w-[218px] h-14 rounded-md hover:bg-secondary-green hover-transition flex items-center justify-center disabled:bg-dark-greyish-cream;
   }
 
   .collection-overlay {
