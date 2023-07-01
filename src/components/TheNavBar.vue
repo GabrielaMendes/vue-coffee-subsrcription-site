@@ -1,20 +1,22 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import { useScrollLock } from "@vueuse/core";
 import IconLogo from "./icons/IconLogo.vue";
 import IconHamburger from "./icons/IconHamburger.vue";
 import IconClose from "./icons/IconClose.vue";
 
 const modalNav = ref(false);
+
+const body = document.querySelector("body");
+const isLocked = useScrollLock(body);
+
 const toggleNav = () => {
   modalNav.value = !modalNav.value;
-  
   if (modalNav.value) {
-    var x=window.scrollX;
-    var y=window.scrollY;
-    window.onscroll = function() {window.scrollTo(x, y);};
+    isLocked.value = true;
   } else {
-    window.onscroll = function() {};
+    isLocked.value = false;
   }
 };
 </script>
