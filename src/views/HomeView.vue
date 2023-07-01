@@ -171,7 +171,7 @@ const steps = [
           <p>{{ step.description }}</p>
         </div>
       </div>
-      <RouterLink role="button" class="app-button max-sm:mx-auto" :to="{ name: 'create' }">
+      <RouterLink role="button" class="app-button max-sm:mx-auto w-fit" :to="{ name: 'create' }">
         Create your plan
       </RouterLink>
     </section>
