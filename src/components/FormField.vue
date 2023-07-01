@@ -28,7 +28,9 @@ const selected = computed({
   >
     <!-- Header -->
     <div
+      tabindex="0"
       @click="emit('toggleCards', step.number)"
+      @keyup.enter="(e) => e.target.click()"
       class="flex items-center gap-2 justify-between mb-10 lg:mb-14"
       :class="
         step.number === '04' && grindDisabled
@@ -59,8 +61,10 @@ const selected = computed({
             class="peer appearance-none hidden"
           />
           <label
+            tabindex="0"
             :for="`${step.number}-${option.title}`"
             @click="currentStep = step.number"
+            @keyup.enter="(e) => e.target.click()"
             class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
           >
             <h3 class="text-2xl mb-3 sm:bm-8 break-words">{{ option.title }}</h3>

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply focus:outline-none focus-visible:ring-2 ring-offset-2 focus-visible:ring-secondary-green focus-visible:ring-offset-transparent
+}
+
 body {
   @apply relative bg-light-beige w-screen overflow-x-hidden font-barlow text-dark-bluish-gray-text text-[15px] lg:text-base;
 }
