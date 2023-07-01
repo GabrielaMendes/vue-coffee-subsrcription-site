@@ -21,7 +21,7 @@ onClickOutside(modal, () => emit("closeModal"))
   <!-- Overlay -->
   <div class="fixed z-50 top-0 left-0 bg-black/40 w-screen h-full flex items-center justify-center px-8">
     <!-- Modal -->
-    <div ref="modal" class="rounded-md max-w-[540px] overflow-x-hidden bg-light-beige">
+    <div ref="modal" class="rounded-md max-w-[540px] overflow-x-hidden max-h-[90svh] overflow-y-auto bg-light-beige">
       <header class="bg-dark-grey-bg text-light-beige p-11">
         <h1 class="text-[28px] sm:text-[40px]">Order Summary</h1>
       </header>

@@ -324,7 +324,7 @@ onMounted(() => toggleField("01"));
         enter-active-class="transition-opacity duration-150 ease-in"
         leave-active-class="transition-opacity duration-150 ease-in"
       >
-        <OrderModal 
+        <OrderModal
           v-if="modalOpen"
           :summary="orderSummary"
           @close-modal="toggleModal"
