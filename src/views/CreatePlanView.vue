@@ -1,8 +1,11 @@
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
 import useAppTitle from "@/composables/useAppTitle";
 import FormField from "../components/FormField.vue";
-import OrderModal from "../components/OrderModal.vue";
+
+const OrderModal = defineAsyncComponent(() => {
+  return import("../components/OrderModal.vue");
+});
 
 useAppTitle("Create Your Plan");
 
@@ -310,11 +313,18 @@ onMounted(() => toggleField("01"));
 
     <!-- Confirmation Modal -->
     <Teleport to="html">
-      <OrderModal 
-        v-if="modalOpen"
-        :summary="orderSummary"
-        @close-modal="toggleModal"
-      />
+      <transition
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+        enter-active-class="transition-opacity duration-150 ease-in"
+        leave-active-class="transition-opacity duration-150 ease-in"
+      >
+        <OrderModal 
+          v-if="modalOpen"
+          :summary="orderSummary"
+          @close-modal="toggleModal"
+        />
+      </transition>
     </Teleport>
   </main>
 </template>
