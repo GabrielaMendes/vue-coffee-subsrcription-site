@@ -1,5 +1,6 @@
 <script setup>
 import { computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
+import { useScrollLock } from "@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
 import FormField from "../components/FormField.vue";
 
@@ -18,8 +19,12 @@ const delivery = ref("_____");
 const currentStep = ref("");
 
 const modalOpen = ref(false)
+const body = document.querySelector("body");
+const isLocked = useScrollLock(body);
+
 const toggleModal = () => {
   modalOpen.value = !modalOpen.value;
+  isLocked.value = !isLocked.value
 }
 
 const grindDisabled = computed(() => {

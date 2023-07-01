@@ -13,11 +13,7 @@ const isLocked = useScrollLock(body);
 
 const toggleNav = () => {
   modalNav.value = !modalNav.value;
-  if (modalNav.value) {
-    isLocked.value = true;
-  } else {
-    isLocked.value = false;
-  }
+  isLocked.value = !isLocked.value
 };
 </script>
 
