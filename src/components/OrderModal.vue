@@ -19,7 +19,7 @@ onClickOutside(modal, () => emit("closeModal"))
 
 <template>
   <!-- Overlay -->
-  <div class="absolute top-0 left-0 bg-black/40 w-screen h-full flex items-center justify-center px-8">
+  <div class="fixed z-50 top-0 left-0 bg-black/40 w-screen h-full flex items-center justify-center px-8">
     <!-- Modal -->
     <div ref="modal" class="rounded-md max-w-[540px] overflow-x-hidden bg-light-beige">
       <header class="bg-dark-grey-bg text-light-beige p-11">
