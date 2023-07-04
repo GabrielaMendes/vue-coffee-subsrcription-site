@@ -19,7 +19,7 @@ const toggleNav = () => {
 
 <template>
   <header class="py-14 flex items-center justify-between relative">
-    <RouterLink to="/">
+    <RouterLink tabindex="-1" to="/">
       <IconLogo aria-hidden="true" class="change-menu:transform change-menu:scale-110" />
       <span class="hidden">Coffeeroasters</span>
     </RouterLink>

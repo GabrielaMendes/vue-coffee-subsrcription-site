@@ -11,7 +11,7 @@ import IconInstagram from "./icons/social-media/IconInstagram.vue";
     class="bg-dark-grey-bg py-14 mb-16 w-full extra-padding flex flex-col gap-12 items-center lg:flex-row lg:justify-between"
   >
     <div class="flex flex-col gap-12 sm:gap-8 items-center lg:flex-row lg:gap-24">
-      <RouterLink :to="{name: 'home'}">
+      <RouterLink tabindex="-1" :to="{name: 'home'}">
         <IconLogo
           :light="true"
           aria-hidden="true"
