@@ -1,35 +1,55 @@
-# coffee-subscription-site
+# Coffeeroasters subscription site
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is a self built solution to the [Coffeeroasters subscription site challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/coffeeroasters-subscription-site-5Fc26HVY6).
 
-## Recommended IDE Setup
+## Table of contents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Other libraries](#other-libraries)
 
-## Customize configuration
+## Overview
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### The challenge
 
-## Project Setup
+Users should be able to:
+  - View the optimal layout for the interface depending on their device's screen size
+  - Navigate smoothly between the different pages
+  - Make selections to create a coffee subscription
+  - See a order summary modal of their selections on the final step and confirm their plan choices
+  - See data on console after submission
 
-```sh
-npm install
-```
+### Screenshot
 
-### Compile and Hot-Reload for Development
+Desktop view:
 
-```sh
-npm run dev
-```
+![](./screenshot/screenshot-desktop-01.png)
 
-### Compile and Minify for Production
+![](./screenshot/screenshot-desktop-02.png)
 
-```sh
-npm run build
-```
+Mobile view:
 
-### Lint with [ESLint](https://eslint.org/)
+![](./screenshot/screenshot-mobile-01.png)
 
-```sh
-npm run lint
-```
+![](./screenshot/screenshot-mobile-02.png)
+
+### Links
+
+- Live Site URL: [Cofeeroasters](https://my-site.app/)
+
+## My process
+
+### Built with
+
+- [Vue.js](https://vuejs.org/) - JS framework
+- [Vue Router](https://router.vuejs.org/) - Routing for Vue
+- [Vite](https://vitejs.dev/) - Frontend build tool
+- [Tailwind Css](https://tailwindcss.com/) - Css framework
+
+### Other libraries
+
+- [VueUse](https://vueuse.org/) - Composition utilities
