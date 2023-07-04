@@ -39,7 +39,7 @@ Mobile view:
 
 ### Links
 
-- Live Site URL: [Cofeeroasters](https://my-site.app/)
+- Live Site URL: [Cofeeroasters](https://coffeeroasters-subscription-henna.vercel.app/)
 
 ## My process
 
