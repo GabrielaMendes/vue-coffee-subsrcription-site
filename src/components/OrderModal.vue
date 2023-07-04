@@ -10,7 +10,7 @@ defineProps({
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const isMobile = breakpoints.smaller("sm");
 
-const emit = defineEmits(["closeModal"]);
+const emit = defineEmits(["closeModal", "confirmOrder"]);
 
 const modal = ref(null);
 
@@ -26,6 +26,10 @@ document.addEventListener("esc", escLeave);
 onUnmounted(() => {
   document.removeEventListener("esc", escLeave);
 });
+
+const confirmOrder = () => {
+  emit("confirmOrder");
+};
 </script>
 
 <template>
@@ -52,7 +56,7 @@ onUnmounted(() => {
 
         <div class="mt-12 flex items-center justify-between gap-2">
           <h3 class="max-sm:hidden text-[32px] text-dark-bluish-gray-text">$14.00/mo</h3>
-          <button class="app-button w-full">
+          <button @click="confirmOrder" class="app-button w-full">
             {{ isMobile ? "Checkout - $14.00/mo" : "Checkout" }}
           </button>
         </div>

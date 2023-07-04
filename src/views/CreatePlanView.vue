@@ -214,6 +214,19 @@ const menuNavigate = (field) => {
   toggleField(field);
 };
 
+const checkout = () => {
+  const order = {
+    preference: preference.value,
+    beanType: beanType.value,
+    quality: quantity.value,
+    grindOption: grindDisabled.value ? null : grindOption.value,
+    delivery : delivery.value
+  }
+
+  console.log(order);
+  toggleModal();
+}
+
 onMounted(() => toggleField("01"));
 </script>
 
@@ -328,6 +341,7 @@ onMounted(() => toggleField("01"));
           v-if="modalOpen"
           :summary="orderSummary"
           @close-modal="toggleModal"
+          @confirm-order="checkout"
         />
       </transition>
     </Teleport>
