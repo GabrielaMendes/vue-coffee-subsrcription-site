@@ -265,7 +265,7 @@ onMounted(() => toggleField("01"));
             :disabled="step.number === '04' && grindDisabled"
             v-for="step in formSteps"
             :key="step.number"
-            class="w-full text-left border-t cursor-pointer disabled:pointer-events-none"
+            class="w-full rounded-sm text-left border-t cursor-pointer disabled:pointer-events-none"
             @click="menuNavigate(step.number)"
             :class="{
               'border-none': step.number === '01',

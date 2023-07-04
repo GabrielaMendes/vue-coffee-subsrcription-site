@@ -31,7 +31,7 @@ const selected = computed({
       tabindex="0"
       @click="emit('toggleCards', step.number)"
       @keyup.enter="(e) => e.target.click()"
-      class="flex items-center gap-2 justify-between mb-10 lg:mb-14"
+      class="rounded-sm flex items-center gap-2 justify-between mb-10 lg:mb-14"
       :class="
         step.number === '04' && grindDisabled
           ? ' opacity-50 pointer-events-none'
