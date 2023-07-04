@@ -13,13 +13,13 @@ const smAndLarger = breakpoints.greaterOrEqual("sm");
 const lgAndLarger = breakpoints.greaterOrEqual("lg");
 
 const commitmentImg = computed(() => {
-  return `src/assets/images/about/${
+  return `/images/about/${
     lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
   }/image-commitment.jpg`;
 });
 
 const qualityImg = computed(() => {
-  return `src/assets/images/about/${
+  return `/images/about/${
     lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
   }/image-quality.jpg`;
 });
