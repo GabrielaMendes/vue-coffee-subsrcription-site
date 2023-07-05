@@ -5,16 +5,17 @@ This project is a self built solution to the [Coffeeroasters subscription site c
 ## Table of contents
 
 - [Overview](#overview)
-  - [The challenge](#the-challenge)
+  - [Features](#features)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [Other libraries](#other-libraries)
+  - [Useful resources](#useful-resources)
 
 ## Overview
 
-### The challenge
+### Features
 
 Users should be able to:
   - View the optimal layout for the interface depending on their device's screen size
@@ -53,3 +54,7 @@ Mobile view:
 ### Other libraries
 
 - [VueUse](https://vueuse.org/) - Composition utilities
+
+### Useful resources
+
+- [Markus Oberlehrer's Blog](https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/) - This helped me build a reusable component for expand/shrink hight transitions
