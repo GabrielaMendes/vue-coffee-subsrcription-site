@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
-import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
+import useDevice from "@/composables/useDevice";
 import useCoffees from "../composables/useCoffees";
 import IconAustralia from "@/components/icons/countries/IconAustralia.vue";
 import IconCanada from "@/components/icons/countries/IconCanada.vue";
@@ -11,25 +11,19 @@ useAppTitle("About Us");
 
 const { headquarters } = useCoffees();
 const iconReferences = {
-  "IconAustralia": IconAustralia,
-  "IconCanada": IconCanada,
-  "IconUK": IconUK,
-}
+  IconAustralia: IconAustralia,
+  IconCanada: IconCanada,
+  IconUK: IconUK,
+};
 
-const breakpoints = useBreakpoints(breakpointsTailwind);
-const smAndLarger = breakpoints.greaterOrEqual("sm");
-const lgAndLarger = breakpoints.greaterOrEqual("lg");
+const { device } = useDevice();
 
 const commitmentImg = computed(() => {
-  return `/images/about/${
-    lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
-  }/image-commitment.jpg`;
+  return `/images/about/${device.value}/image-commitment.jpg`;
 });
 
 const qualityImg = computed(() => {
-  return `/images/about/${
-    lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
-  }/image-quality.jpg`;
+  return `/images/about/${device.value}/image-quality.jpg`;
 });
 </script>
 
@@ -40,7 +34,11 @@ const qualityImg = computed(() => {
       <div
         class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
       >
-        <h2 class="motion-safe:animate-[pulse_2.5s_ease-in] text-[28px] sm:text-[32px] lg:text-[40px]">About us</h2>
+        <h2
+          class="text-[28px] sm:text-[32px] lg:text-[40px]"
+        >
+          About us
+        </h2>
         <p>
           Coffeeroasters began its journey of exotic discovery in 1999, highlighting stories of
           coffee from around the world. We have since been dedicated to bring the perfect cup - from
