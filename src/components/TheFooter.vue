@@ -33,7 +33,7 @@ import IconInstagram from "./icons/social-media/IconInstagram.vue";
       </nav>
     </div>
 
-    <div class="flex gap-6 ml-auto">
+    <div class="flex gap-6 lg:ml-auto">
       <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
         <IconFacebook aria-hidden="true" />
         <span class="hidden">Facebook</span>
