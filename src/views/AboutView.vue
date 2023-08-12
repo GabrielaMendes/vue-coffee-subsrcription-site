@@ -1,12 +1,20 @@
 <script setup>
+import { computed } from "vue";
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
-import { computed } from "vue";
+import useCoffees from "../composables/useCoffees";
 import IconAustralia from "@/components/icons/countries/IconAustralia.vue";
 import IconCanada from "@/components/icons/countries/IconCanada.vue";
 import IconUK from "@/components/icons/countries/IconUK.vue";
 
 useAppTitle("About Us");
+
+const { headquarters } = useCoffees();
+const iconReferences = {
+  "IconAustralia": IconAustralia,
+  "IconCanada": IconCanada,
+  "IconUK": IconUK,
+}
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const smAndLarger = breakpoints.greaterOrEqual("sm");
@@ -23,33 +31,6 @@ const qualityImg = computed(() => {
     lgAndLarger.value ? "desktop" : smAndLarger.value ? "tablet" : "mobile"
   }/image-quality.jpg`;
 });
-
-const headquarters = [
-  {
-    icon: IconUK,
-    country: "United Kingdom",
-    address: "68 Asfordby Rd",
-    city: "Alcaston",
-    region: "SY6 1YA",
-    phone: "+44 1241 918425",
-  },
-  {
-    icon: IconCanada,
-    country: "Canada",
-    address: "1528 Eglinton Avenue",
-    city: "Toronto",
-    region: "Ontario M4P 1A6",
-    phone: "+1 416 485 2997",
-  },
-  {
-    icon: IconAustralia,
-    country: "Australia",
-    address: "36 Swanston Street",
-    city: "Kewell",
-    region: "Victoria",
-    phone: "+61 4 9928 3629",
-  },
-];
 </script>
 
 <template>
@@ -127,7 +108,7 @@ const headquarters = [
           :key="head.country"
           class="text-center sm:text-left flex flex-col items-center sm:items-start"
         >
-          <component :is="head.icon" class="mb-12"></component>
+          <component :is="iconReferences[head.icon]" class="mb-12"></component>
           <h3 class="text-[28px] sm:text-2xl lg:text-[32px] mb-6 sm:max-lg:mb-5">
             {{ head.country }}
           </h3>

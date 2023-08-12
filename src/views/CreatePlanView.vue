@@ -3,6 +3,7 @@ import { computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
 import { useScrollLock } from "@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
 import FormField from "../components/FormField.vue";
+import useCoffees from "../composables/useCoffees";
 
 const OrderModal = defineAsyncComponent(() => {
   return import("../components/OrderModal.vue");
@@ -18,14 +19,14 @@ const delivery = ref("_____");
 
 const currentStep = ref("");
 
-const modalOpen = ref(false)
+const modalOpen = ref(false);
 const body = document.querySelector("body");
 const isLocked = useScrollLock(body);
 
 const toggleModal = () => {
   modalOpen.value = !modalOpen.value;
-  isLocked.value = !isLocked.value
-}
+  isLocked.value = !isLocked.value;
+};
 
 const grindDisabled = computed(() => {
   return preference.value === "Capsule";
@@ -43,26 +44,7 @@ const orderSummary = computed(() => {
   }, sent to me <span class='text-primary-green'>${delivery.value}</span>.”`;
 });
 
-const steps = [
-  {
-    number: "01",
-    name: "Pick your coffee",
-    description:
-      "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
-  },
-  {
-    number: "02",
-    name: "Choose the frequency",
-    description:
-      "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
-  },
-  {
-    number: "03",
-    name: "Receive and enjoy!",
-    description:
-      "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
-  },
-];
+const { steps } = useCoffees();
 
 const formSteps = [
   {
@@ -220,12 +202,12 @@ const checkout = () => {
     beanType: beanType.value,
     quality: quantity.value,
     grindOption: grindDisabled.value ? null : grindOption.value,
-    delivery : delivery.value
-  }
+    delivery: delivery.value,
+  };
 
   console.log(order);
   toggleModal();
-}
+};
 
 onMounted(() => toggleField("01"));
 </script>
@@ -237,7 +219,9 @@ onMounted(() => toggleField("01"));
       <div
         class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
       >
-        <h2 class="text-[40px] motion-safe:animate-[pulse_2.5s_ease-in] sm:text-5xl lg:text-7xl">Create a plan</h2>
+        <h2 class="text-[40px] motion-safe:animate-[pulse_2.5s_ease-in] sm:text-5xl lg:text-7xl">
+          Create a plan
+        </h2>
         <p>
           Build a subscription plan that best fits your needs. We offer an assortment of the
           bdel="picked"est artisan coffees from around the globe delivered fresh to your door.

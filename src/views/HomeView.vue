@@ -2,77 +2,21 @@
 import { RouterLink } from "vue-router";"@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
 import useDevice from "@/composables/useDevice"
+import useCoffees from "@/composables/useCoffees"
 import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue";
 import IconGift from "@/components/icons/IconGift.vue";
 import IconTruck from "@/components/icons/IconTruck.vue";
 
 useAppTitle("Home");
 
-const coffees = [
-  {
-    name: "Gran Espresso",
-    image: "/images/home/desktop/image-gran-espresso.png",
-    description: "Light and flavorful blend with cocoa and black pepper for an intense experience",
-  },
-  {
-    name: "Planalto",
-    image: "/images/home/desktop/image-planalto.png",
-    description: "Brazilian dark roast with rich and velvety body, and hints of fruits and nuts",
-  },
-  {
-    name: "Piccollo",
-    image: "/images/home/desktop/image-piccollo.png",
-    description: "Mild and smooth blend featuring notes of toasted almond and dried cherry",
-  },
-  {
-    name: "Danche",
-    image: "/images/home/desktop/image-danche.png",
-    description: "Ethiopian hand-harvested blend densely packed with vibrant fruit notes",
-  },
-];
-
-const benefits = [
-  {
-    name: "Best quality",
-    image: IconCoffeeBean,
-    description:
-      "Discover an endless variety of the world’s best artisan coffee from each of our roasters.",
-  },
-  {
-    name: "Exclusive benefits",
-    image: IconGift,
-    description:
-      "Special offers and swag when you subscribe, including 30% off your first shipment.",
-  },
-  {
-    name: "Free shipping ",
-    image: IconTruck,
-    description: "We cover the cost and coffee is delivered fast. Peak freshness: guaranteed.",
-  },
-];
-
-const steps = [
-  {
-    number: "01",
-    name: "Pick your coffee",
-    description:
-      "Select from our evolving range of artisan coffees. Our beans are ethically sourced and we pay fair prices for them. There are new coffees in all profiles every month for you to try out.",
-  },
-  {
-    number: "02",
-    name: "Choose the frequency",
-    description:
-      "Customize your order frequency, quantity, even your roast style and grind type. Pause, skip or cancel your subscription with no commitment through our online portal.",
-  },
-  {
-    number: "03",
-    name: "Receive and enjoy!",
-    description:
-      "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
-  },
-];
-
+const { coffees, benefits, steps } = useCoffees()
 const { device } = useDevice();
+
+const iconReferences = {
+  "IconCoffeeBean": IconCoffeeBean,
+  "IconGift": IconGift,
+  "IconTruck": IconTruck,
+}
 
 //Animation
 const initial = {
@@ -176,7 +120,7 @@ const visibleOnce = {
           :visibleOnce="visibleOnce"
           class="bg-primary-green rounded-md text-center text-light-beige p-12 last:pt-[70px] last:sm:max-lg:pt-12 flex flex-col sm:max-lg:flex-row items-center gap-14 sm:max-lg:gap-12"
         >
-          <component :is="benefit.image" class="shrink-0"></component>
+          <component :is="iconReferences[benefit.image]" class="shrink-0"></component>
 
           <div class="sm:max-lg:text-left">
             <h3 class="mb-6 text-2xl">{{ benefit.name }}</h3>
