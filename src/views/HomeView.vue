@@ -1,6 +1,7 @@
 <script setup>
-import { RouterLink } from "vue-router";
-import useAppTitle from "@/composables/useAppTitle"
+import { RouterLink } from "vue-router";"@vueuse/core";
+import useAppTitle from "@/composables/useAppTitle";
+import useDevice from "@/composables/useDevice"
 import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue";
 import IconGift from "@/components/icons/IconGift.vue";
 import IconTruck from "@/components/icons/IconTruck.vue";
@@ -70,6 +71,24 @@ const steps = [
       "We ship your package within 48 hours, freshly roasted. Sit back and enjoy award-winning  world-class coffees curated to provide a distinct tasting experience.",
   },
 ];
+
+const { device } = useDevice();
+
+//Animation
+const initial = {
+  opacity: 0,
+  y: 100,
+};
+
+const visibleOnce = {
+  opacity: 1,
+  y: 0,
+  transition: {
+    duration: 400,
+    type: "keyframes",
+    ease: "linear",
+  },
+};
 </script>
 
 <template>
@@ -104,8 +123,21 @@ const steps = [
         class="lg:flex gap-[30px] justify-between items-start extra-padding relative z-10 sm:pt-14"
       >
         <div
-          v-for="coffee in coffees"
+          v-for="(coffee, i) in coffees"
           :key="coffee.name"
+          v-motion
+          :initial="initial"
+          :enter="i === 0 && device === 'tablet'  ? visibleOnce : {}"
+          :visibleOnce="{
+            opacity: 1,
+            y: 0,
+            transition: {
+              delay: device === 'desktop' ? 200 * i : 0,
+              duration: 400,
+              type: 'keyframes',
+              ease: 'linear',
+            },
+          }"
           class="max-lg:mb-14 max-lg:last:mb-0 flex flex-1 flex-col items-center justify-center gap-6 sm:gap-10 lg:gap-[71px] sm:max-lg:flex-row"
         >
           <img :src="coffee.image" alt="coffee illustration" class="w-[200px] sm:w-[255px]" />
@@ -139,6 +171,9 @@ const steps = [
         <div
           v-for="benefit in benefits"
           :key="benefit.name"
+          v-motion
+          :initial="initial"
+          :visibleOnce="visibleOnce"
           class="bg-primary-green rounded-md text-center text-light-beige p-12 last:pt-[70px] last:sm:max-lg:pt-12 flex flex-col sm:max-lg:flex-row items-center gap-14 sm:max-lg:gap-12"
         >
           <component :is="benefit.image" class="shrink-0"></component>
@@ -160,7 +195,34 @@ const steps = [
           class="max-sm:hidden border-b-[3px] border-light-salmon w-[65vw] lg:w-[58vw] max-w-[658px] absolute top-3.5"
         ></span>
 
-        <div v-for="step in steps" :key="step.number" class="mb-14 flex-1">
+        <div
+          v-for="(step, i) in steps"
+          :key="step.number"
+          class="mb-14 flex-1"
+          v-motion
+          :initial="
+            device === 'mobile'
+              ? initial
+              : {
+                  x: device === 'desktop' ? -300 * i : -200 * i,
+                  opacity: 0.2,
+                }
+          "
+          :visibleOnce="
+            device === 'mobile'
+              ? visibleOnce
+              : {
+                  x: 0,
+                  opacity: 1,
+                  transition: {
+                    delay: 100,
+                    duration: 500 * i,
+                    type: 'keyframes',
+                    ease: 'linear',
+                  },
+                }
+          "
+        >
           <div
             class="max-sm:hidden mb-14 w-[31px] h-[31px] rounded-full bg-light-beige border-2 border-primary-green relative z-10"
           ></div>
