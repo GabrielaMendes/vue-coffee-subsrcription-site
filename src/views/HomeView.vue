@@ -2,6 +2,7 @@
 import { RouterLink } from "vue-router";"@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
 import useDevice from "@/composables/useDevice"
+import useSlideUp from "@/composables/useSlideUp";
 import useCoffees from "@/composables/useCoffees"
 import IconCoffeeBean from "@/components/icons/IconCoffeeBean.vue";
 import IconGift from "@/components/icons/IconGift.vue";
@@ -19,20 +20,7 @@ const iconReferences = {
 }
 
 //Animation
-const initial = {
-  opacity: 0,
-  y: 100,
-};
-
-const visibleOnce = {
-  opacity: 1,
-  y: 0,
-  transition: {
-    duration: 400,
-    type: "keyframes",
-    ease: "linear",
-  },
-};
+const {initial, visibleOnce} = useSlideUp()
 </script>
 
 <template>
@@ -116,8 +104,8 @@ const visibleOnce = {
           v-for="benefit in benefits"
           :key="benefit.name"
           v-motion
-          :initial="initial"
-          :visibleOnce="visibleOnce"
+          :initial="device === 'desktop' ? {} : initial"
+          :visibleOnce="device === 'desktop' ? {} : visibleOnce"
           class="bg-primary-green rounded-md text-center text-light-beige p-12 last:pt-[70px] last:sm:max-lg:pt-12 flex flex-col sm:max-lg:flex-row items-center gap-14 sm:max-lg:gap-12"
         >
           <component :is="iconReferences[benefit.image]" class="shrink-0"></component>
