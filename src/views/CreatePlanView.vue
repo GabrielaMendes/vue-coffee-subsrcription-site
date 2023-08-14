@@ -206,9 +206,12 @@ const onCardSelected = (field) => {
   ? parseInt(field) + 1
   : parseInt(field);
   
-  if (formSteps[nextStepIndex]) {
-    formSteps[nextStepIndex].expanded.value = true;
+  if(!formSteps[nextStepIndex]) {
+    return;
   }
+
+  const nextStep = formSteps[nextStepIndex]
+  !nextStep.expanded.value && toggleField(nextStep.number)
 };
 
 const checkout = () => {
