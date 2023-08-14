@@ -9,7 +9,7 @@ const props = defineProps({
   grindDisabled: Boolean,
 });
 
-const emit = defineEmits(["update:modelValue", "toggleCards"]);
+const emit = defineEmits(["update:modelValue", "cardSelected","toggleCards"]);
 
 const selected = computed({
   get() {
@@ -63,7 +63,7 @@ const selected = computed({
           <label
             tabindex="0"
             :for="`${step.number}-${option.title}`"
-            @click="currentStep = step.number"
+            @click="$emit('cardSelected')"
             @keyup.enter="(e) => e.target.click()"
             class="block h-full p-7 lg:max-xl:p-6 bg-greyish-cream rounded-md cursor-pointer hover:bg-light-salmon peer-checked:bg-primary-green peer-checked:text-light-beige transition-colors duration-300 ease-linear"
           >

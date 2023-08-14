@@ -2,8 +2,8 @@
 import { computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
 import { useScrollLock } from "@vueuse/core";
 import useAppTitle from "@/composables/useAppTitle";
-import FormField from "../components/FormField.vue";
-import useCoffees from "../composables/useCoffees";
+import FormField from "@/components/FormField.vue";
+import useCoffees from "@/composables/useCoffees";
 
 const OrderModal = defineAsyncComponent(() => {
   return import("../components/OrderModal.vue");
@@ -183,6 +183,7 @@ const toggleField = (field) => {
 watch(grindDisabled, (newValue) => {
   if (newValue && formSteps[3].expanded.value) {
     toggleField("04");
+    currentStep.value = "01";
   }
 });
 
@@ -191,9 +192,23 @@ const menuNavigate = (field) => {
 
   const step = formSteps.find((step) => step.number === field);
   if (step.expanded.value === true) {
+    currentStep.value = field;
     return;
   }
   toggleField(field);
+};
+
+const onCardSelected = (field) => {
+  currentStep.value = field;
+
+  const nextStepIndex =
+  field === "03" && grindDisabled.value
+  ? parseInt(field) + 1
+  : parseInt(field);
+  
+  if (formSteps[nextStepIndex]) {
+    formSteps[nextStepIndex].expanded.value = true;
+  }
 };
 
 const checkout = () => {
@@ -219,9 +234,7 @@ onMounted(() => toggleField("01"));
       <div
         class="text-light-beige w-full text-center sm:text-left sm:w-[398px] lg:w-[493px] h-full flex flex-col justify-center items-center sm:items-start gap-10"
       >
-        <h2 class="text-[40px] motion-safe:animate-[pulse_2.5s_ease-in] sm:text-5xl lg:text-7xl">
-          Create a plan
-        </h2>
+        <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
         <p>
           Build a subscription plan that best fits your needs. We offer an assortment of the
           bdel="picked"est artisan coffees from around the globe delivered fresh to your door.
@@ -294,6 +307,7 @@ onMounted(() => toggleField("01"));
               :grindDisabled="grindDisabled"
               v-model="step.model.value"
               @toggle-cards="toggleField"
+              @card-selected="onCardSelected(step.number)"
             />
           </div>
 
