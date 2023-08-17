@@ -239,8 +239,7 @@ onMounted(() => toggleField("01"));
       >
         <h2 class="text-[40px] sm:text-5xl lg:text-7xl">Create a plan</h2>
         <p>
-          Build a subscription plan that best fits your needs. We offer an assortment of the
-          bdel="picked"est artisan coffees from around the globe delivered fresh to your door.
+          Build a subscription plan that best fits your needs. We offer an assortment of the best artisan coffees from around the globe delivered fresh to your door.
         </p>
       </div>
     </section>
